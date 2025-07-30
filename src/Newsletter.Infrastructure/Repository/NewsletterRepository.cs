@@ -19,7 +19,7 @@ public class NewsletterRepository : INewsletterRepository
         var sql =
             @"
             SELECT id, user_id, topics, content, sent, created_at
-            FROM newsletter_entries
+            FROM Newsletters
             WHERE user_id = @UserId";
 
         return await _connection.QueryAsync<NewsletterEntry>(sql, new { UserId = userId });
@@ -30,7 +30,7 @@ public class NewsletterRepository : INewsletterRepository
         var sql =
             @"
             SELECT id, user_id, topics, content, sent, created_at
-            FROM newsletter_entries
+            FROM Newsletters
             WHERE id = @NewsletterId AND user_id = @UserId";
 
         return await _connection.QuerySingleOrDefaultAsync<NewsletterEntry>(
@@ -43,7 +43,7 @@ public class NewsletterRepository : INewsletterRepository
     {
         var sql =
             @"
-            INSERT INTO newsletter_entries (id, user_id, topics, content, sent, created_at)
+            INSERT INTO Newsletters (id, user_id, topics, content, sent, created_at)
             VALUES (@Id, @UserId, @Topics, @Content, @Sent, @CreatedAt)
             RETURNING id, user_id, topics, content, sent, created_at";
 
@@ -61,9 +61,17 @@ public class NewsletterRepository : INewsletterRepository
         );
     }
 
+    
+    public async Task<bool> DeleteAsyncById(Guid userId, Guid newsletterId)
+    {
+        var sql = @"DELETE FROM Newsletters WHERE user_id = @UserId AND id = @NewsletterId";
+        var affected = await _connection.ExecuteAsync(sql, new { UserId = userId, NewsletterId = newsletterId });
+        return affected > 0;
+    }
+
     public async Task<bool> DeleteAsync(Guid userId)
     {
-        var sql = @"DELETE FROM newsletter_entries WHERE user_id = @UserId";
+        var sql = @"DELETE FROM Newsletters WHERE user_id = @UserId";
         var affected = await _connection.ExecuteAsync(sql, new { UserId = userId });
         return affected > 0;
     }

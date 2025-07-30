@@ -39,6 +39,9 @@ public class NewslettersController : ControllerBase
     [HttpPost("generate")]
     public async Task<IActionResult> Generate([FromBody] GenerateNewsletterRequest request)
     {
+        if (request.UserId == Guid.Empty)
+            return BadRequest(new { message = "UserId não pode ser Guid vazio." });
+        
         var newsletter = await _newsletterService.GenerateAndSendAsync(request);
         return Ok(newsletter);
     }
@@ -49,6 +52,16 @@ public class NewslettersController : ControllerBase
         var success = await _newsletterService.DeleteAsync(userId);
         if (!success)
             return NotFound(new { message = "Nenhuma newsletter encontrada para esse usuário." });
+
+        return NoContent();
+    }
+    
+    [HttpDelete("{userId:guid}/newsletter/{newsletterId:guid}")]
+    public async Task<IActionResult> DeleteByUserAndNewLetterId(Guid userId, Guid newsletterId)
+    {
+        var success = await _newsletterService.DeleteAsyncNewLetterId(userId,newsletterId);
+        if (!success)
+            return NotFound(new { message = "newsletter não encontrada para esse usuário." });
 
         return NoContent();
     }

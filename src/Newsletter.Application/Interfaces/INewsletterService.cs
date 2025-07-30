@@ -11,4 +11,6 @@ public interface INewsletterService
     Task<NewsletterDto> GenerateAndSendAsync(GenerateNewsletterRequest request);
 
     Task<bool> DeleteAsync(Guid userId);
+
+    Task<bool> DeleteAsyncNewLetterId(Guid userId, Guid newsletterId);
 }

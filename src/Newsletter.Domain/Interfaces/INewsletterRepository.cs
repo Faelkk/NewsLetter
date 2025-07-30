@@ -12,5 +12,7 @@ public interface INewsletterRepository
     Task<NewsletterEntry> GenerateAndSendAsync(NewsletterEntry newsletter);
 
     Task<bool> DeleteAsync(Guid userId);
+
+    Task<bool> DeleteAsyncById(Guid userId, Guid newsletterId);
 }
 

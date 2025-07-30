@@ -7,22 +7,24 @@ namespace Newsletter.Application.Services;
 
 public class NewsletterService : INewsletterService
 {
-    private readonly INewsletterRepository _repository;
+    private readonly INewsletterRepository _newsLetterRepository;
+    private readonly IUserRepository _userRepository;
 
-    public NewsletterService(INewsletterRepository repository)
+    public NewsletterService(INewsletterRepository repository,IUserRepository userRepository)
     {
-        _repository = repository;
+        _newsLetterRepository = repository;
+        _userRepository = userRepository;
     }
 
     public async Task<IEnumerable<NewsletterDto>> GetByUserIdAsync(Guid userId)
     {
-        var newsletters = await _repository.GetByUserIdAsync(userId);
+        var newsletters = await _newsLetterRepository.GetByUserIdAsync(userId);
         return newsletters.Select(MapToDto);
     }
 
     public async Task<NewsletterDto> GetByIdAsync(Guid userId, Guid newsletterId)
     {
-        var newsletter = await _repository.GetByIdAsync(userId, newsletterId);
+        var newsletter = await _newsLetterRepository.GetByIdAsync(userId, newsletterId);
         if (newsletter is null)
             throw new Exception("Newsletter não encontrada.");
 
@@ -31,31 +33,50 @@ public class NewsletterService : INewsletterService
 
     public async Task<NewsletterDto> GenerateAndSendAsync(GenerateNewsletterRequest request)
     {
+     
+        var user = await _userRepository.GetByIdAsync(request.UserId);
+        if (user is null)
+            throw new Exception("Usuário não encontrado.");
+
+        if (user.Interests == null || user.Interests.Length == 0)
+
+            throw new Exception("Usuário não possui interesses cadastrados.");
+
+        var topics = user.Interests;
+
+
+  
         var entity = new NewsletterEntry
         {
             Id = Guid.NewGuid(),
-            UserId = request.UserId,
-            Topics = request.Topics,
-            Content = $"Conteúdo gerado automaticamente sobre: {string.Join(", ", request.Topics)}.",
+            UserId = user.Id,
+            Topics = topics,
+            Content = $"Conteúdo gerado automaticamente sobre: {string.Join(", ", topics)}.",
             Sent = true,
             CreatedAt = DateTime.UtcNow
         };
 
-        var saved = await _repository.GenerateAndSendAsync(entity);
+        var saved = await _newsLetterRepository.GenerateAndSendAsync(entity);
         return MapToDto(saved);
     }
 
+
     public async Task<bool> DeleteAsync(Guid userId)
     {
-        return await _repository.DeleteAsync(userId);
+        return await _newsLetterRepository.DeleteAsync(userId);
     }
+    public async Task<bool> DeleteAsyncNewLetterId(Guid userId, Guid newsletterId)
+    {
+        return await _newsLetterRepository.DeleteAsyncById(userId,newsletterId);
+    }
+
 
     private static NewsletterDto MapToDto(NewsletterEntry entity)
     {
         return new NewsletterDto(
             Id: entity.Id,
             UserId: entity.UserId,
-            Topics: entity.Topics,
+            Topics: entity.Topics.ToList(),
             Content: entity.Content,
             Sent: entity.Sent,
             CreatedAt: entity.CreatedAt

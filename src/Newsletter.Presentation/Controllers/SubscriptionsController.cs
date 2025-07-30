@@ -40,9 +40,6 @@ public class SubscriptionsController : ControllerBase
         try
         {
             var subscription = await _subscriptionService.CreateAsync(request);
-            
-            Console.WriteLine(subscription);
-            Console.WriteLine("criouuuuuuuuuu");
             return CreatedAtAction(nameof(GetByUser), new { userId = subscription.UserId }, subscription);
 
         }
