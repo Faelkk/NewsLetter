@@ -37,3 +37,4 @@ COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Newsletter.Presentation.dll"]
 
 
+

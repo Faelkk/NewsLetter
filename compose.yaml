@@ -16,7 +16,7 @@
 
   postgres_db:
     image: postgres:latest
-    container_name: post
+    container_name: postgres_db
     volumes:
       - postgres_data:/var/lib/postgresql/data
     restart: always
@@ -26,6 +26,8 @@
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
+    networks:
+      - minha-rede
 
 volumes:
   postgres_data:
@@ -34,5 +36,7 @@ volumes:
 networks:
   minha-rede:
     driver: bridge
+
+
 
 

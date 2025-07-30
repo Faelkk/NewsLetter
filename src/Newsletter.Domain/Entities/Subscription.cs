@@ -14,3 +14,5 @@ public class Subscription
     public DateTime? CanceledAt { get; set; }
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 }
+
+

@@ -3,6 +3,7 @@ using Newsletter.Application.Services;
 using Newsletter.Domain.Interfaces;
 using Newsletter.Infrastructure.Context;
 using Newsletter.Infrastructure.Repository;
+using Newsletter.Infrastructure.Seed;
 using Newsletter.Presentation.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,7 @@ builder.Services.AddScoped<INewsletterService, NewsletterService>();
 builder.Services.AddScoped<INewsletterRepository, NewsletterRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ISubscriptionRepository, SubscriptionRepository>();
+builder.Services.AddScoped<DatabaseSeed>();
 
 builder.Services.AddOpenApi();
 
@@ -42,6 +44,14 @@ var port = builder.Configuration["APIPORT"] ?? "5010";
 builder.WebHost.UseUrls($"http://*:{port}");
 
 var app = builder.Build();
+
+
+using (var scope = app.Services.CreateScope())
+{
+    var seeder = scope.ServiceProvider.GetRequiredService<DatabaseSeed>();
+    seeder.Initialize();
+}
+
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.MapControllers();
@@ -51,7 +61,7 @@ app.UseSwaggerUI(c =>
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Newsletters API v1");
 });
 
-// Configure the HTTP request pipeline.
+
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
