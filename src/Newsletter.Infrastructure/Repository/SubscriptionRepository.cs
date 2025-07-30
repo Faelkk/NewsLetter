@@ -22,59 +22,55 @@ public class SubscriptionRepository : ISubscriptionRepository
 
     public async Task<Subscription?> GetByUserIdAsync(Guid userId)
     {
-        var sql = "SELECT * FROM Subscriptions WHERE UserId = @userId";
+        var sql = "SELECT * FROM Subscriptions WHERE user_id = @userId";
         return await _connection.QueryFirstOrDefaultAsync<Subscription>(sql, new { userId });
     }
 
     public async Task<Subscription> CreateAsync(Subscription subscription)
     {
-        var sql = @"
-            INSERT INTO Subscriptions 
-                (Id, UserId, ExternalSubscriptionId, Provider, Status, StartedAt, ExpiresAt, CanceledAt, UpdatedAt)
-            VALUES 
-                (@Id, @UserId, @ExternalSubscriptionId, @Provider, @Status, @StartedAt, @ExpiresAt, @CanceledAt, @UpdatedAt);
-        ";
-
-
         if (subscription.Id == Guid.Empty)
             subscription.Id = Guid.NewGuid();
 
-
         subscription.UpdatedAt = DateTime.UtcNow;
 
-        await _connection.ExecuteAsync(sql, subscription);
+        var sql = @"
+        INSERT INTO Subscriptions 
+            (id, user_id, external_subscription_id, provider, status, started_at, expires_at, canceled_at, updated_at)
+        VALUES 
+            (@Id, @UserId, @ExternalSubscriptionId, @Provider, @Status, @StartedAt, @ExpiresAt, @CanceledAt, @UpdatedAt)
+        RETURNING *;";
 
-        return subscription;
+        var createdSubscription = await _connection.QuerySingleAsync<Subscription>(sql, subscription);
+        return createdSubscription;
     }
+
 
     public async Task<Subscription?> UpdateAsync(Subscription subscription)
     {
-        var sql = @"
-            UPDATE Subscriptions SET
-                ExternalSubscriptionId = @ExternalSubscriptionId,
-                Provider = @Provider,
-                Status = @Status,
-                StartedAt = @StartedAt,
-                ExpiresAt = @ExpiresAt,
-                CanceledAt = @CanceledAt,
-                UpdatedAt = @UpdatedAt
-            WHERE Id = @Id;
-        ";
-
         subscription.UpdatedAt = DateTime.UtcNow;
 
-        var affectedRows = await _connection.ExecuteAsync(sql, subscription);
+        var sql = @"
+        UPDATE Subscriptions SET
+            external_subscription_id = @ExternalSubscriptionId,
+            provider = @Provider,
+            status = @Status,
+            started_at = @StartedAt,
+            expires_at = @ExpiresAt,
+            canceled_at = @CanceledAt,
+            updated_at = @UpdatedAt
+        WHERE id = @Id
+        RETURNING *;";
 
-        if (affectedRows == 0)
-            return null;
-
-        return subscription;
+        var updatedSubscription = await _connection.QuerySingleOrDefaultAsync<Subscription>(sql, subscription);
+        return updatedSubscription;
     }
 
-    public async Task<bool> DeleteAsync(Guid id)
+
+    public async Task<bool> DeleteAsync(Guid userId)
     {
-        var sql = "DELETE FROM Subscriptions WHERE Id = @id";
-        var affectedRows = await _connection.ExecuteAsync(sql, new { id });
+        var sql = "DELETE FROM Subscriptions WHERE user_id = @userId";
+        var affectedRows = await _connection.ExecuteAsync(sql, new { userId });
         return affectedRows > 0;
     }
 }
+

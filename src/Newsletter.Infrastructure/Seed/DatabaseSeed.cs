@@ -25,7 +25,7 @@ public class DatabaseSeed
     private void CreateTables(IDbConnection connection)
     {
         var createUsers = """
-                          CREATE TABLE IF NOT EXISTS users (
+                          CREATE TABLE IF NOT EXISTS Users (
                               id UUID PRIMARY KEY,
                               name TEXT NOT NULL,
                               email TEXT NOT NULL UNIQUE,
@@ -39,7 +39,7 @@ public class DatabaseSeed
                                """;
 
         var createSubscriptions = """
-                                  CREATE TABLE IF NOT EXISTS subscriptions (
+                                  CREATE TABLE IF NOT EXISTS Subscriptions (
                                       id UUID PRIMARY KEY,
                                       user_id UUID NOT NULL,
                                       external_subscription_id TEXT NOT NULL,
@@ -52,8 +52,12 @@ public class DatabaseSeed
                                   );
                                   """;
 
+        var createSubscriptionUserIdUniqueIndex = """
+                                                   CREATE UNIQUE INDEX IF NOT EXISTS idx_subscriptions_user_id ON Subscriptions(user_id);
+                                                   """;
+
         var createNewsletters = """
-                                CREATE TABLE IF NOT EXISTS newsletters (
+                                CREATE TABLE IF NOT EXISTS Newsletters (
                                     id UUID PRIMARY KEY,
                                     user_id UUID NOT NULL,
                                     topics TEXT[] NOT NULL,
@@ -63,13 +67,14 @@ public class DatabaseSeed
                                 );
                                 """;
 
-        
-        
         connection.Execute(createUsers);
         connection.Execute(createEmailIndex); 
+
         connection.Execute(createSubscriptions);
+        connection.Execute(createSubscriptionUserIdUniqueIndex);
+
         connection.Execute(createNewsletters);
-        
+
         var tables = connection.Query<string>(
             """
             SELECT table_name
@@ -84,7 +89,5 @@ public class DatabaseSeed
             Console.WriteLine($"✅ {table}");
         }
     }
-
 }
-
 

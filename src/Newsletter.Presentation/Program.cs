@@ -7,6 +7,7 @@ using Newsletter.Infrastructure.Seed;
 using Newsletter.Presentation.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
+Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
 
 builder.Services.AddScoped<IDatabaseContext, DatabaseContext>();
 builder.Services.AddScoped<IUserService, UserService>();

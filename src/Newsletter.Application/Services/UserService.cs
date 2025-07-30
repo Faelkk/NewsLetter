@@ -23,7 +23,7 @@ public class UserService : IUserService
             Name: user.Name,
             Email: user.Email,
             Plan: user.Plan,
-            Interests: user.Interests
+            Interests: user.Interests.ToList()
         ));
     }
 
@@ -39,7 +39,7 @@ public class UserService : IUserService
             Name: user.Name,
             Email: user.Email,
             Plan: user.Plan,
-            Interests: user.Interests
+            Interests: user.Interests.ToList()
         );
     }
 
@@ -56,7 +56,7 @@ public class UserService : IUserService
             Name = request.Name,
             Email = request.Email,
             Plan = request.Plan ?? "free",
-            Interests = request.Interests ?? new List<string>()
+           Interests = request.Interests?.ToArray() ?? Array.Empty<string>()
         };
 
         var createdUser = await _userRepository.CreateAsync(user);
@@ -66,7 +66,7 @@ public class UserService : IUserService
             Name: createdUser.Name,
             Email: createdUser.Email,
             Plan: createdUser.Plan,
-            Interests: createdUser.Interests
+            Interests: createdUser.Interests.ToList()
         );
     }
 
@@ -74,12 +74,20 @@ public class UserService : IUserService
     {
         var user = await _userRepository.GetByIdAsync(id);
         if (user is null)
-            return null; 
+            return null;
 
         user.Name = request.Name ?? user.Name;
         user.Email = request.Email ?? user.Email;
         user.Plan = request.Plan ?? user.Plan;
-        user.Interests = request.Interests ?? user.Interests;
+
+        if (request.Interests is not null && request.Interests.Any())
+        {
+            var mergedInterests = user.Interests
+                .Union(request.Interests, StringComparer.OrdinalIgnoreCase)
+                .ToArray();
+
+            user.Interests = mergedInterests;
+        }
 
         var updatedUser = await _userRepository.UpdateAsync(user);
 
@@ -88,7 +96,7 @@ public class UserService : IUserService
             Name: updatedUser.Name,
             Email: updatedUser.Email,
             Plan: updatedUser.Plan,
-            Interests: updatedUser.Interests
+            Interests: updatedUser.Interests.ToList()
         );
     }
 
@@ -98,4 +106,5 @@ public class UserService : IUserService
         return await _userRepository.DeleteAsync(id);
     }
 }
+
 

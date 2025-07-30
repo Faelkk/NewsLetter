@@ -3,16 +3,13 @@ using System.ComponentModel.DataAnnotations;
 namespace Newsletter.Application.DTOS.Users;
 
 public record UpdateUserRequest(
-    [Required] string Name,
-
-    [Required]
+  string? Name,
+  
     [EmailAddress(ErrorMessage = "E-mail inválido.")]
-    string Email,
-
-    [Required]
+    string? Email,
+  
     [MinLength(1, ErrorMessage = "Informe pelo menos um interesse.")]
-    List<string> Interests,
-
-    [Required]
-    string Plan
+    List<string>? Interests,
+  
+    string? Plan
 );

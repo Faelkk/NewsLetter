@@ -14,5 +14,5 @@ public interface ISubscriptionRepository
     
     Task<Subscription?> UpdateAsync(Subscription subscription);
     
-    Task<bool> DeleteAsync(Guid id);
+    Task<bool> DeleteAsync(Guid userId);
 }

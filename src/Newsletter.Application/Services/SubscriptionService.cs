@@ -9,10 +9,12 @@ namespace Newsletter.Application.Services;
 public class SubscriptionService : ISubscriptionService
 {
     private readonly ISubscriptionRepository _subscriptionRepository;
+    private readonly IUserRepository _userRepository;
 
-    public SubscriptionService(ISubscriptionRepository subscriptionRepository)
+    public SubscriptionService(ISubscriptionRepository subscriptionRepository,IUserRepository userRepository)
     {
         _subscriptionRepository = subscriptionRepository;
+        _userRepository = userRepository;
     }
 
     public async Task<IEnumerable<SubscriptionDto>> GetAllAsync()
@@ -33,6 +35,10 @@ public class SubscriptionService : ISubscriptionService
 
     public async Task<SubscriptionDto> CreateAsync(CreateSubscriptionRequest request)
     {
+        var user = await _userRepository.GetByIdAsync(request.UserId);
+        if (user is null)
+            throw new Exception("Usuário não encontrado."); 
+
         var entity = new Subscription
         {
             Id = Guid.NewGuid(),
@@ -47,12 +53,14 @@ public class SubscriptionService : ISubscriptionService
         };
 
         var created = await _subscriptionRepository.CreateAsync(entity);
+        
+        Console.WriteLine("Created",created.Id);
         return MapToDto(created);
     }
 
     public async Task<SubscriptionDto?> UpdateAsync(UpdateSubscriptionRequest request, Guid id)
     {
-        var existing = await _subscriptionRepository.GetByUserIdAsync(request.UserId);
+        var existing = await _subscriptionRepository.GetByUserIdAsync(id);
         if (existing == null)
             return null;
 
@@ -91,3 +99,5 @@ public class SubscriptionService : ISubscriptionService
         );
     }
 }
+
+

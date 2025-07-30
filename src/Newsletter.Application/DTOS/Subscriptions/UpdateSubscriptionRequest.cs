@@ -1,7 +1,6 @@
 namespace Newsletter.Presentation.DTOS;
 
 public record UpdateSubscriptionRequest(
-    Guid UserId,
     string? ExternalSubscriptionId,
     string? Provider,
     string? Status,

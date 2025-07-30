@@ -15,14 +15,12 @@ public class NewslettersController : ControllerBase
         _newsletterService = newsletterService;
     }
 
-
     [HttpGet("{userId:guid}")]
     public async Task<IActionResult> GetByUser(Guid userId)
     {
         var newsletters = await _newsletterService.GetByUserIdAsync(userId);
         return Ok(newsletters);
     }
-
 
     [HttpGet("{userId:guid}/newsletter/{newsletterId:guid}")]
     public async Task<IActionResult> GetById(Guid userId, Guid newsletterId)
@@ -37,15 +35,13 @@ public class NewslettersController : ControllerBase
             return NotFound(new { message = ex.Message });
         }
     }
-    
+
     [HttpPost("generate")]
     public async Task<IActionResult> Generate([FromBody] GenerateNewsletterRequest request)
     {
-        
         var newsletter = await _newsletterService.GenerateAndSendAsync(request);
         return Ok(newsletter);
     }
-
 
     [HttpDelete("{userId:guid}")]
     public async Task<IActionResult> DeleteByUser(Guid userId)

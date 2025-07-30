@@ -16,7 +16,8 @@ public class NewsletterRepository : INewsletterRepository
 
     public async Task<IEnumerable<NewsletterEntry>> GetByUserIdAsync(Guid userId)
     {
-        var sql = @"
+        var sql =
+            @"
             SELECT id, user_id, topics, content, sent, created_at
             FROM newsletter_entries
             WHERE user_id = @UserId";
@@ -26,34 +27,38 @@ public class NewsletterRepository : INewsletterRepository
 
     public async Task<NewsletterEntry> GetByIdAsync(Guid userId, Guid newsletterId)
     {
-        var sql = @"
+        var sql =
+            @"
             SELECT id, user_id, topics, content, sent, created_at
             FROM newsletter_entries
             WHERE id = @NewsletterId AND user_id = @UserId";
 
-        return await _connection.QuerySingleOrDefaultAsync<NewsletterEntry>(sql, new
-        {
-            UserId = userId,
-            NewsletterId = newsletterId
-        });
+        return await _connection.QuerySingleOrDefaultAsync<NewsletterEntry>(
+            sql,
+            new { UserId = userId, NewsletterId = newsletterId }
+        );
     }
 
     public async Task<NewsletterEntry> GenerateAndSendAsync(NewsletterEntry newsletter)
     {
-        var sql = @"
+        var sql =
+            @"
             INSERT INTO newsletter_entries (id, user_id, topics, content, sent, created_at)
             VALUES (@Id, @UserId, @Topics, @Content, @Sent, @CreatedAt)
             RETURNING id, user_id, topics, content, sent, created_at";
-        
-        return await _connection.QuerySingleAsync<NewsletterEntry>(sql, new
-        {
-            newsletter.Id,
-            newsletter.UserId,
-            Topics = newsletter.Topics.ToArray(), 
-            newsletter.Content,
-            newsletter.Sent,
-            newsletter.CreatedAt
-        });
+
+        return await _connection.QuerySingleAsync<NewsletterEntry>(
+            sql,
+            new
+            {
+                newsletter.Id,
+                newsletter.UserId,
+                Topics = newsletter.Topics.ToArray(),
+                newsletter.Content,
+                newsletter.Sent,
+                newsletter.CreatedAt,
+            }
+        );
     }
 
     public async Task<bool> DeleteAsync(Guid userId)
@@ -63,5 +68,3 @@ public class NewsletterRepository : INewsletterRepository
         return affected > 0;
     }
 }
-
-
