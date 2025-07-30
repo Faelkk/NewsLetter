@@ -1,0 +1,38 @@
+﻿services:
+  newsletter:
+    container_name: newsletter
+    build:
+      context: .
+      dockerfile: src/Newsletter.Presentation/Dockerfile
+    environment:
+      - ConnectionStrings__Default=${CONNECTION_STRING}
+    networks:
+      - minha-rede
+    ports:
+      - "5000:80"
+    depends_on:
+      - postgres_db
+    restart: unless-stopped
+
+  postgres_db:
+    image: postgres:latest
+    container_name: post
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  minha-rede:
+    driver: bridge
+
+

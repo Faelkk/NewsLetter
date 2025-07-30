@@ -9,10 +9,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e3e925c3-4186-4082-9bc0-1e01e104e7c2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Newsletter.Domain/Entities/NewsletterEntry.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Newsletter.Domain/Entities/Subscription.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Application/DTOS/Newsletter/GenerateNewsletterRequest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Application/DTOS/Newsletter/NewsletterDto.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Application/DTOS/Subscriptions/CreateSubscriptionRequest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Application/DTOS/Subscriptions/SubscriptionDto.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Application/DTOS/Subscriptions/UpdateSubscriptionRequest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Application/DTOS/Users/CreateUserReques.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Application/DTOS/Users/UpdateUserRequest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Application/DTOS/Users/UserDto.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Application/Interfaces/INewsletterService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Application/Interfaces/ISubscriptionService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Application/Interfaces/IUserService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Application/Services/NewsletterService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Application/Services/SubscriptionService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Application/Services/UserService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Domain/Interfaces/INewsletterService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Domain/Interfaces/ISubscriptionRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Domain/Interfaces/IUserService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Context/DatabaseContext.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Context/IDatabaseContext.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Repository/NewsletterRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Repository/SubscriptionRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Repository/UserRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Presentation/Controllers/NewslettersController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Presentation/Controllers/SubscriptionsController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Presentation/Controllers/UserController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.NewsLetter/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.NewsLetter/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NewsLetter.sln" beforeDir="false" afterPath="$PROJECT_DIR$/NewsLetter.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Newsletter.Domain/Entities/Subscription.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Domain/Entities/Subscription.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Newsletter.Domain/Entities/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Domain/Entities/User.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Class1.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Newsletter.Infrastructure.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Newsletter.Presentation/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Presentation/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Newsletter.Presentation/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Presentation/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Newsletter.Presentation/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Presentation/appsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +65,13 @@
     "accountId": "66ed7ba1-8cc8-46ef-a0a6-4c67af1cb799"
   }
 }]]></component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock://C:/Users/achte/OneDrive/Documentos/csharp-projects/NewsLetter/src/Newsletter.Domain/Entities/User.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
+  <component name="KubernetesApiProvider"><![CDATA[{
+  "isMigrated": true
+}]]></component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo"><![CDATA[{
   "customColor": "",
@@ -49,6 +87,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Docker.src/Newsletter.Presentation/Dockerfile publish.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -61,7 +100,7 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected=".NET Launch Settings Profile.Newsletter.Presentation: http">
+  <component name="RunManager" selected="Docker.src/Newsletter.Presentation/Dockerfile publish">
     <configuration name="Newsletter.Presentation: http" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/src/Newsletter.Presentation/Newsletter.Presentation.csproj" />
       <option name="LAUNCH_PROFILE_TFM" value="net9.0" />
@@ -113,10 +152,41 @@
       <EXTENSION ID="com.jetbrains.rider.docker.debug" isFastModeEnabled="true" isSslEnabled="false" />
       <method v="2" />
     </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml" />
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
       <deployment type="dockerfile" />
       <method v="2" />
     </configuration>
+    <configuration name="compose.yaml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="compose.yaml" />
+        </settings>
+      </deployment>
+      <EXTENSION ID="com.jetbrains.rider.docker.debug" isFastModeEnabled="true" isSslEnabled="false" />
+      <method v="2" />
+    </configuration>
+    <configuration name="src/Newsletter.Presentation/Dockerfile publish" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="imageTag" value="build_publish" />
+          <option name="buildCliOptions" value="--target publish" />
+          <option name="buildOnly" value="true" />
+          <option name="contextFolderPath" value="$PROJECT_DIR$" />
+          <option name="sourceFilePath" value="src/Newsletter.Presentation/Dockerfile" />
+        </settings>
+      </deployment>
+      <EXTENSION ID="com.jetbrains.rider.docker.debug" isFastModeEnabled="true" isSslEnabled="false" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Docker.src/Newsletter.Presentation/Dockerfile publish" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -125,7 +195,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1753811828912</updated>
-      <workItem from="1753811830402" duration="2256000" />
+      <workItem from="1753811830402" duration="17257000" />
     </task>
     <task id="LOCAL-00001" summary="Feat: initial structure">
       <option name="closed" value="true" />
@@ -135,7 +205,15 @@
       <option name="project" value="LOCAL" />
       <updated>1753814391401</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Feat: add entities in domain layer">
+      <option name="closed" value="true" />
+      <created>1753815244126</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1753815244126</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -146,7 +224,8 @@
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Feat: initial structure" />
-    <option name="LAST_COMMIT_MESSAGE" value="Feat: initial structure" />
+    <MESSAGE value="Feat: add entities in domain layer" />
+    <option name="LAST_COMMIT_MESSAGE" value="Feat: add entities in domain layer" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

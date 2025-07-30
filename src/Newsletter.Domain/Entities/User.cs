@@ -7,5 +7,5 @@ public class User
       public required string Email { get; set; }
 
       public string Plan { get; set; } = "free";
-      public list<string> Interests  { get; set; }
+      public required List<string> Interests  { get; set; }
 }
