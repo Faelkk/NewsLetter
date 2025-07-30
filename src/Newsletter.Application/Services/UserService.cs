@@ -1,77 +1,101 @@
 using Newsletter.Application.DTOS.Users;
 using Newsletter.Application.Interfaces;
-using NewsLetter.Domain.Entities;
+using Newsletter.Domain.Entities;
+using Newsletter.Domain.Interfaces;
 
 namespace Newsletter.Application.Services;
 
 public class UserService : IUserService
 {
-    public Task<IEnumerable<UserDto>> GetAsync()
+    private readonly IUserRepository _userRepository;
+
+    public UserService(IUserRepository userRepository)
     {
-        var users = new List<UserDto>
+        _userRepository = userRepository;
+    }
+    
+    public async Task<IEnumerable<UserDto>> GetAsync()
+    {
+        var users = await _userRepository.GetAllAsync();
+
+        return users.Select(user => new UserDto(
+            Id: user.Id,
+            Name: user.Name,
+            Email: user.Email,
+            Plan: user.Plan,
+            Interests: user.Interests
+        ));
+    }
+
+    public async Task<UserDto?> GetByIdAsync(Guid id)
+    {
+        var user = await _userRepository.GetByIdAsync(id);
+    
+        if (user is null)
+            return null; 
+
+        return new UserDto(
+            Id: user.Id,
+            Name: user.Name,
+            Email: user.Email,
+            Plan: user.Plan,
+            Interests: user.Interests
+        );
+    }
+
+    
+
+    public async Task<UserDto> CreateAsync(CreateUserRequest request)
+    {  
+        var existingUser = await _userRepository.GetByIdEmail(request.Email);
+        if (existingUser is not null)
+            throw new Exception("E-mail já cadastrado.");
+        
+        var user = new User
         {
-            new UserDto(
-                Id: Guid.NewGuid(),
-                Name: "João Silva",
-                Email: "joao@email.com",
-                Plan: "Premium",
-                Interests: new List<string> { "IA", "Finanças" }
-            ),
-            new UserDto(
-                Id: Guid.NewGuid(),
-                Name: "Maria Souza",
-                Email: "maria@email.com",
-                Plan: "Basic",
-                Interests: new List<string> { "Esportes", "Tecnologia" }
-            )
+            Name = request.Name,
+            Email = request.Email,
+            Plan = request.Plan ?? "free",
+            Interests = request.Interests ?? new List<string>()
         };
 
-        return Task.FromResult((IEnumerable<UserDto>)users);
-    }
+        var createdUser = await _userRepository.CreateAsync(user);
 
-    public Task<UserDto> GetByIdAsync(Guid id)
-    {
-        var user = new UserDto(
-            Id: id,
-            Name: "João Silva",
-            Email: "joao@email.com",
-            Plan: "Premium",
-            Interests: new List<string> { "IA", "Finanças" }
+        return new UserDto(
+            Id: createdUser.Id,
+            Name: createdUser.Name,
+            Email: createdUser.Email,
+            Plan: createdUser.Plan,
+            Interests: createdUser.Interests
         );
-
-        return Task.FromResult(user);
     }
 
-    public Task<UserDto> CreateAsync(CreateUserRequest request)
+    public async Task<UserDto?> UpdateAsync(Guid id, UpdateUserRequest request)
     {
-        var newUser = new UserDto(
-            Id: Guid.NewGuid(),
-            Name: request.Name,
-            Email: request.Email,
-            Plan: request.Plan,
-            Interests: request.Interests ?? new List<string>()
+        var user = await _userRepository.GetByIdAsync(id);
+        if (user is null)
+            return null; 
+
+        user.Name = request.Name ?? user.Name;
+        user.Email = request.Email ?? user.Email;
+        user.Plan = request.Plan ?? user.Plan;
+        user.Interests = request.Interests ?? user.Interests;
+
+        var updatedUser = await _userRepository.UpdateAsync(user);
+
+        return new UserDto(
+            Id: updatedUser.Id,
+            Name: updatedUser.Name,
+            Email: updatedUser.Email,
+            Plan: updatedUser.Plan,
+            Interests: updatedUser.Interests
         );
-
-        return Task.FromResult(newUser);
     }
 
-    public Task<UserDto> UpdateAsync(Guid id, UpdateUserRequest request)
+
+    public async Task<bool> DeleteAsync(Guid id)
     {
-        var updatedUser = new UserDto(
-            Id: id,
-            Name: request.Name ?? "Nome Atualizado",
-            Email: request.Email ?? "email@atualizado.com",
-            Plan: request.Plan ?? "Basic",
-            Interests: request.Interests ?? new List<string>()
-        );
-
-        return Task.FromResult(updatedUser);
-    }
-
-    public Task<bool> DeleteAsync(Guid id)
-    {
-
-        return Task.FromResult(true);
+        return await _userRepository.DeleteAsync(id);
     }
 }
 

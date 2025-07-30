@@ -1,12 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Newsletter.Application.DTOS.Users;
 using Newsletter.Application.Interfaces;
-using NewsLetter.Domain.Entities;
 
 namespace Newsletter.Presentation.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("[controller]")]
 public class UsersController : ControllerBase
 {
     private readonly IUserService _userService;
@@ -20,14 +19,15 @@ public class UsersController : ControllerBase
     public async Task<IActionResult> Get()
     {
         var users = await _userService.GetAsync();
-        
         return Ok(users);
     }
-    
+
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetById(Guid id)
     {
         var user = await _userService.GetByIdAsync(id);
+        if (user is null)
+            return NotFound();
 
         return Ok(user);
     }
@@ -35,22 +35,47 @@ public class UsersController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateUserRequest request)
     {
-        var createdUser = await _userService.CreateAsync(request);
-        return CreatedAtAction(nameof(GetById), new { id = createdUser.Id }, createdUser);
+        try
+        {
+            var createdUser = await _userService.CreateAsync(request);
+            return CreatedAtAction(nameof(GetById), new { id = createdUser.Id }, createdUser);
+        }
+        catch (Exception ex) when (ex.Message.Contains("E-mail já cadastrado"))
+        {
+            return Conflict(new { message = ex.Message });
+        }
     }
 
     [HttpPatch("{id:guid}")]
     public async Task<IActionResult> Update(Guid id, [FromBody] UpdateUserRequest request)
     {
-        var updatedUser = await _userService.UpdateAsync(id,request);
+        var updatedUser = await _userService.UpdateAsync(id, request);
+        if (updatedUser is null)
+            return NotFound();
+
         return Ok(updatedUser);
     }
-
 
     [HttpDelete("{id:guid}")]
     public async Task<IActionResult> Delete(Guid id)
     {
-        await _userService.DeleteAsync(id);
+        var result = await _userService.DeleteAsync(id);
+        if (!result)
+            return NotFound();
+
         return NoContent();
     }
 }
+
+
+namespace Newsletter.Presentation.DTOS;
+
+public record UpdateSubscriptionRequest(
+    Guid UserId,
+    string? ExternalSubscriptionId,
+    string? Provider,
+    string? Status,
+    DateTime? StartedAt,
+    DateTime? ExpiresAt,
+    DateTime? CanceledAt
+);

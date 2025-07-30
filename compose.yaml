@@ -9,7 +9,7 @@
     networks:
       - minha-rede
     ports:
-      - "5000:80"
+      - "5010:5010"
     depends_on:
       - postgres_db
     restart: unless-stopped

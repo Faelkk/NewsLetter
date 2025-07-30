@@ -10,7 +10,8 @@ public class DatabaseContext : IDatabaseContext
 
     public DatabaseContext(IConfiguration configuration)
     {
-        _connectionString = configuration.GetConnectionString("DefaultConnection");
+        _connectionString = configuration.GetConnectionString("DefaultConnection")
+                            ?? throw new ArgumentNullException("Connection string is missing.");
     }
 
     public IDbConnection CreateConnection()
@@ -18,3 +19,4 @@ public class DatabaseContext : IDatabaseContext
         return new NpgsqlConnection(_connectionString);
     }
 }
+

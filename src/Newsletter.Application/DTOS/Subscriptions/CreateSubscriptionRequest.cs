@@ -1,6 +1,13 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Newsletter.Application.DTOS.Subscriptions;
 
 public record CreateSubscriptionRequest(
-    Guid UserId,
+    [Required] Guid UserId,
+
+    [Required(ErrorMessage = "O ID da assinatura externa é obrigatório.")]
     string ExternalSubscriptionId,
-    string Provider);
+
+    [Required(ErrorMessage = "O provedor é obrigatório.")]
+    string Provider
+);

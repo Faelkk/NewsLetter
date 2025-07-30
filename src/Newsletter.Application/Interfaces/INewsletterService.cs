@@ -4,7 +4,7 @@ namespace Newsletter.Application.Interfaces;
 
 public interface INewsletterService
 {
-    Task<NewsletterDto> GetByUserIdAsync(Guid userId);
+    Task<IEnumerable<NewsletterDto>> GetByUserIdAsync(Guid userId);
 
     Task<NewsletterDto> GetByIdAsync(Guid userId, Guid newsletterId);
 

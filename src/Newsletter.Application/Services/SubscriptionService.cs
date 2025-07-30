@@ -1,83 +1,93 @@
 using Newsletter.Application.DTOS.Subscriptions;
 using Newsletter.Application.Interfaces;
+using Newsletter.Domain.Entities;
+using Newsletter.Domain.Interfaces;
 using Newsletter.Presentation.DTOS;
 
 namespace Newsletter.Application.Services;
 
 public class SubscriptionService : ISubscriptionService
 {
-    public Task<SubscriptionDto> GetByUserIdAsync(Guid userId)
-    {
-        var subscription = new SubscriptionDto(
-            Id: Guid.NewGuid(),
-            UserId: userId,
-            ExternalSubscriptionId: "sub_123456",
-            Provider: "MercadoPago",
-            Status: "active",
-            StartedAt: DateTime.UtcNow.AddDays(-10),
-            ExpiresAt: DateTime.UtcNow.AddDays(20),
-            CanceledAt: null,
-            UpdatedAt: DateTime.UtcNow
-        );
+    private readonly ISubscriptionRepository _subscriptionRepository;
 
-        return Task.FromResult(subscription);
+    public SubscriptionService(ISubscriptionRepository subscriptionRepository)
+    {
+        _subscriptionRepository = subscriptionRepository;
     }
 
-    public Task<SubscriptionDto> GetBySubscriptionIdAsync(Guid userId, Guid subscriptionId)
+    public async Task<IEnumerable<SubscriptionDto>> GetAllAsync()
     {
-        var subscription = new SubscriptionDto(
-            Id: subscriptionId,
-            UserId: userId,
-            ExternalSubscriptionId: "sub_654321",
-            Provider: "MercadoPago",
-            Status: "canceled",
-            StartedAt: DateTime.UtcNow.AddDays(-30),
-            ExpiresAt: DateTime.UtcNow.AddDays(-5),
-            CanceledAt: DateTime.UtcNow.AddDays(-6),
-            UpdatedAt: DateTime.UtcNow
-        );
-
-        return Task.FromResult(subscription);
+        var subscriptions = await _subscriptionRepository.GetAllAsync();
+        return subscriptions.Select(MapToDto);
     }
 
-    public Task<SubscriptionDto> CreateAsync(CreateSubscriptionRequest request)
+    
+    public async Task<SubscriptionDto?> GetByUserIdAsync(Guid userId)
     {
-        var newSubscription = new SubscriptionDto(
-            Id: Guid.NewGuid(),
-            UserId: request.UserId,
-            ExternalSubscriptionId: request.ExternalSubscriptionId,
-            Provider: request.Provider,
-            Status: "active",
-            StartedAt: DateTime.UtcNow,
-            ExpiresAt: DateTime.UtcNow.AddMonths(1),
-            CanceledAt: null,
-            UpdatedAt: DateTime.UtcNow
-        );
+        var subscription = await _subscriptionRepository.GetByUserIdAsync(userId);
+        if (subscription == null)
+            return null;
 
-        return Task.FromResult(newSubscription);
+        return MapToDto(subscription);
     }
 
-    public Task<SubscriptionDto> UpdateAsync(UpdateSubscriptionRequest request,Guid id)
+    public async Task<SubscriptionDto> CreateAsync(CreateSubscriptionRequest request)
     {
-        var updated = new SubscriptionDto(
-            Id: id,
-            UserId: request.UserId,
-            ExternalSubscriptionId: request.ExternalSubscriptionId ?? "sub_default",
-            Provider: request.Provider ?? "MercadoPago",
-            Status: request.Status ?? "active",
-            StartedAt: request.StartedAt,
-            ExpiresAt: request.ExpiresAt,
-            CanceledAt: request.CanceledAt,
-            UpdatedAt: DateTime.UtcNow
-        );
+        var entity = new Subscription
+        {
+            Id = Guid.NewGuid(),
+            UserId = request.UserId,
+            ExternalSubscriptionId = request.ExternalSubscriptionId,
+            Provider = request.Provider ?? "MercadoPago",
+            Status = "active",
+            StartedAt = DateTime.UtcNow,
+            ExpiresAt = DateTime.UtcNow.AddMonths(1),
+            CanceledAt = null,
+            UpdatedAt = DateTime.UtcNow
+        };
 
-        return Task.FromResult(updated);
+        var created = await _subscriptionRepository.CreateAsync(entity);
+        return MapToDto(created);
     }
 
-    public Task<bool> DeleteByUserAsync(Guid userId)
+    public async Task<SubscriptionDto?> UpdateAsync(UpdateSubscriptionRequest request, Guid id)
     {
-        return Task.FromResult(true);
+        var existing = await _subscriptionRepository.GetByUserIdAsync(request.UserId);
+        if (existing == null)
+            return null;
+
+        existing.ExternalSubscriptionId = request.ExternalSubscriptionId ?? existing.ExternalSubscriptionId;
+        existing.Provider = request.Provider ?? existing.Provider;
+        existing.Status = request.Status ?? existing.Status;
+        existing.StartedAt = request.StartedAt ?? existing.StartedAt;
+        existing.ExpiresAt = request.ExpiresAt ?? existing.ExpiresAt;
+        existing.CanceledAt = request.CanceledAt ?? existing.CanceledAt;
+        existing.UpdatedAt = DateTime.UtcNow;
+
+        var updated = await _subscriptionRepository.UpdateAsync(existing);
+        if (updated == null)
+            return null;
+
+        return MapToDto(updated);
+    }
+
+    public async Task<bool> DeleteByUserAsync(Guid userId)
+    {
+        return await _subscriptionRepository.DeleteAsync(userId);
+    }
+
+    private SubscriptionDto MapToDto(Subscription sub)
+    {
+        return new SubscriptionDto(
+            Id: sub.Id,
+            UserId: sub.UserId,
+            ExternalSubscriptionId: sub.ExternalSubscriptionId,
+            Provider: sub.Provider,
+            Status: sub.Status,
+            StartedAt: sub.StartedAt,
+            ExpiresAt: sub.ExpiresAt,
+            CanceledAt: sub.CanceledAt,
+            UpdatedAt: sub.UpdatedAt
+        );
     }
 }
-
-

@@ -6,4 +6,4 @@ public record NewsletterDto(
     List<string> Topics,
     string Content,
     bool Sent,
-    DateTime CreatedAt);
+    DateTime CreatedAt); 
