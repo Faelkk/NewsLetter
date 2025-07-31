@@ -16,15 +16,15 @@ public class UsersController : ControllerBase
         _userService = userService;
     }
 
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [HttpGet]
     public async Task<IActionResult> Get()
     {
         var users = await _userService.GetAsync();
         return Ok(users);
     }
-
-    [Authorize]
+    
+    [Authorize(Roles = "Admin")]
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetById(Guid id)
     {
@@ -34,8 +34,7 @@ public class UsersController : ControllerBase
 
         return Ok(user);
     }
-
-    [Authorize]
+    
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateUserRequest request)
     {
@@ -67,6 +66,7 @@ public class UsersController : ControllerBase
     
     
     
+    [Authorize(Roles = "Admin")]
     [HttpPatch("{id:guid}")]
     public async Task<IActionResult> Update(Guid id, [FromBody] UpdateUserRequest request)
     {
@@ -85,7 +85,7 @@ public class UsersController : ControllerBase
         return Ok(updatedUser);
     }
 
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [HttpDelete("{id:guid}")]
     public async Task<IActionResult> Delete(Guid id)
     {

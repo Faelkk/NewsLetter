@@ -41,8 +41,8 @@ public class UserRepository : IUserRepository
     public async Task<User> CreateAsync(User user)
     {
         var sql = @"
-        INSERT INTO Users (id, name, email, password, interests)
-        VALUES (@Id, @Name, @Email, @Password, @Interests)
+        INSERT INTO Users (id, name, email, password, interests,role)
+        VALUES (@Id, @Name, @Email, @Password, @Interests,@Role)
         RETURNING *;
     ";
         
@@ -57,9 +57,9 @@ public class UserRepository : IUserRepository
         UPDATE Users
         SET name = @Name,
             email = @Email,
-            plan = @Plan,
             password = @Password,
-            interests = @Interests
+            interests = @Interests,
+            role = @Role
         WHERE id = @Id
         RETURNING *;
     ";

@@ -16,7 +16,7 @@ public class NewslettersController : ControllerBase
         _newsletterService = newsletterService;
     }
 
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [HttpGet("{userId:guid}")]
     public async Task<IActionResult> GetByUser(Guid userId)
     {
@@ -24,7 +24,7 @@ public class NewslettersController : ControllerBase
         return Ok(newsletters);
     }
 
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [HttpGet("{userId:guid}/newsletter/{newsletterId:guid}")]
     public async Task<IActionResult> GetById(Guid userId, Guid newsletterId)
     {
@@ -39,7 +39,7 @@ public class NewslettersController : ControllerBase
         }
     }
     
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [HttpPost("generate")]
     public async Task<IActionResult> Generate([FromBody] GenerateNewsletterRequest request)
     {
@@ -50,7 +50,7 @@ public class NewslettersController : ControllerBase
         return Ok(newsletter);
     }
 
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [HttpDelete("{userId:guid}")]
     public async Task<IActionResult> DeleteByUser(Guid userId)
     {
@@ -61,7 +61,7 @@ public class NewslettersController : ControllerBase
         return NoContent();
     }
     
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [HttpDelete("{userId:guid}/newsletter/{newsletterId:guid}")]
     public async Task<IActionResult> DeleteByUserAndNewLetterId(Guid userId, Guid newsletterId)
     {

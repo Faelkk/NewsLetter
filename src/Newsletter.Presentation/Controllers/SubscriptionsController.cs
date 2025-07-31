@@ -18,7 +18,7 @@ public class SubscriptionsController : ControllerBase
         _subscriptionService = subscriptionService;
     }
 
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
@@ -26,7 +26,7 @@ public class SubscriptionsController : ControllerBase
         return Ok(allSubscriptions);
     }
 
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [HttpGet("{userId:guid}")]
     public async Task<IActionResult> GetByUser(Guid userId)
     {
@@ -37,7 +37,7 @@ public class SubscriptionsController : ControllerBase
         return Ok(subs);
     }
     
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateSubscriptionRequest request)
     {
@@ -53,7 +53,7 @@ public class SubscriptionsController : ControllerBase
         }
     }
     
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [HttpPatch("{id:guid}")]
     public async Task<IActionResult> Update([FromBody] UpdateSubscriptionRequest request, Guid id)
     {
@@ -76,7 +76,7 @@ public class SubscriptionsController : ControllerBase
     }
 
 
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [HttpDelete("{userId:guid}")]
     public async Task<IActionResult> DeleteByUser(Guid userId)
     {

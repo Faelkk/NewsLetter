@@ -1,6 +1,7 @@
 using Newsletter.Application.DTOS.Users;
 using Newsletter.Application.Interfaces;
 using Newsletter.Domain.Entities;
+using Newsletter.Domain.Enums;
 using Newsletter.Domain.Interfaces;
 
 namespace Newsletter.Application.Services;
@@ -26,6 +27,7 @@ public class UserService : IUserService
             Id: user.Id,
             Name: user.Name,
             Email: user.Email,
+            Role: user.Role,
 
             Interests: user.Interests.ToList()
         ));
@@ -42,7 +44,8 @@ public class UserService : IUserService
             Id: user.Id,
             Name: user.Name,
             Email: user.Email,
-            Interests: user.Interests.ToList()
+            Interests: user.Interests.ToList(),
+            Role: user.Role
         );
     }
 
@@ -64,7 +67,8 @@ public class UserService : IUserService
             Name = request.Name,
             Email = request.Email,
             Interests = request.Interests?.ToArray() ?? Array.Empty<string>(),
-            Password = hashedPassword
+            Password = hashedPassword,
+            Role = EnumRoles.User,
         };
 
         var createdUser = await _userRepository.CreateAsync(user);
@@ -116,7 +120,8 @@ public class UserService : IUserService
             Name = request.Name ?? user.Name,
             Email = request.Email ?? user.Email,
             Password = updatedPassword,
-            Interests = updatedInterests
+            Interests = updatedInterests,
+            Role = request.Role ?? user.Role
         };
 
         var resultUser = await _userRepository.UpdateAsync(updatedUser);
@@ -125,7 +130,8 @@ public class UserService : IUserService
             Id: resultUser.Id,
             Name: resultUser.Name,
             Email: resultUser.Email,
-            Interests: resultUser.Interests.ToList()
+            Interests: resultUser.Interests.ToList(),
+            Role: resultUser.Role
         );
     }
 

@@ -1,3 +1,5 @@
+    using Newsletter.Domain.Enums;
+
     namespace Newsletter.Domain.Entities;
 
     public class User
@@ -6,6 +8,8 @@
         public required string Name { get; init; }
         public required string Email { get; init; }
         public required string Password { get; init; }
+        
+        public required EnumRoles Role { get; init; }
         public required string[] Interests { get; init; }
     }
     
