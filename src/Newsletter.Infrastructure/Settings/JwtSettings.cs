@@ -7,3 +7,4 @@ public class JwtSettings
     public string Audience { get; set; } = null!;
     public int ExpireMinutes { get; set; }
 }
+

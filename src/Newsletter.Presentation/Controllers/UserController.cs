@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newsletter.Application.DTOS.Users;
 using Newsletter.Application.Interfaces;
@@ -15,6 +16,7 @@ public class UsersController : ControllerBase
         _userService = userService;
     }
 
+    [Authorize]
     [HttpGet]
     public async Task<IActionResult> Get()
     {
@@ -22,6 +24,7 @@ public class UsersController : ControllerBase
         return Ok(users);
     }
 
+    [Authorize]
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetById(Guid id)
     {
@@ -32,13 +35,15 @@ public class UsersController : ControllerBase
         return Ok(user);
     }
 
+    [Authorize]
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateUserRequest request)
     {
         try
         {
-            var createdUser = await _userService.CreateAsync(request);
-            return CreatedAtAction(nameof(GetById), new { id = createdUser.Id }, createdUser);
+            var tokenDto = await _userService.CreateAsync(request);
+            
+            return Ok(tokenDto);
         }
         catch (Exception ex) when (ex.Message.Contains("E-mail já cadastrado"))
         {
@@ -46,6 +51,22 @@ public class UsersController : ControllerBase
         }
     }
 
+    [HttpPost("login")]
+    public async Task<IActionResult> Login([FromBody] LoginUserRequest request)
+    {
+        try
+        {
+            var tokenDto = await _userService.LoginAsync(request);
+            return Ok(tokenDto);
+        }
+        catch (Exception ex) when (ex.Message.Contains("Usuário ou senha inválidos"))
+        {
+            return Unauthorized(new { message = ex.Message });
+        }
+    }
+    
+    
+    
     [HttpPatch("{id:guid}")]
     public async Task<IActionResult> Update(Guid id, [FromBody] UpdateUserRequest request)
     {
@@ -64,6 +85,7 @@ public class UsersController : ControllerBase
         return Ok(updatedUser);
     }
 
+    [Authorize]
     [HttpDelete("{id:guid}")]
     public async Task<IActionResult> Delete(Guid id)
     {

@@ -9,12 +9,13 @@ public class UserService : IUserService
 {
     private readonly IUserRepository _userRepository;
     private readonly IPasswordHasher _passwordHasher;
+    private readonly IJwtService _jwtService;
 
-
-    public UserService(IUserRepository userRepository, IPasswordHasher passwordHasher)
+    public UserService(IUserRepository userRepository, IPasswordHasher passwordHasher,IJwtService jwtService)
     {
         _userRepository = userRepository;
         _passwordHasher = passwordHasher;
+        _jwtService = jwtService;
     }
     
     public async Task<IEnumerable<UserDto>> GetAsync()
@@ -47,13 +48,13 @@ public class UserService : IUserService
 
     
 
-    public async Task<UserDto> CreateAsync(CreateUserRequest request)
-    {  
+    public async Task<TokenDto> CreateAsync(CreateUserRequest request)
+    {
         var existingUser = await _userRepository.GetByIdEmail(request.Email);
         if (existingUser is not null)
             throw new Exception("E-mail já cadastrado.");
 
-        var id = Guid.NewGuid();  
+        var id = Guid.NewGuid();
 
         var hashedPassword = _passwordHasher.HashPassword(null!, request.Password);
 
@@ -68,14 +69,27 @@ public class UserService : IUserService
 
         var createdUser = await _userRepository.CreateAsync(user);
 
-        return new UserDto(
-            Id: createdUser.Id,
-            Name: createdUser.Name,
-            Email: createdUser.Email,
-            Interests: createdUser.Interests.ToList()
-        );
+        var token = _jwtService.GenerateToken(user); 
+
+        return new TokenDto(token); 
     }
-    
+
+
+    public async Task<TokenDto> LoginAsync(LoginUserRequest request)
+    {
+        var user = await _userRepository.GetByIdEmail(request.Email);
+        if (user == null)
+            throw new Exception("Usuário não encontrado.");
+
+        var isValidPassword = _passwordHasher.VerifyPassword(user, request.Password);
+        if (!isValidPassword)
+            throw new Exception("Usuário ou senha inválidos.");
+
+        var token = _jwtService.GenerateToken(user);
+
+        return new TokenDto(token);
+    }
+
     public async Task<UserDto?> UpdateAsync(Guid id, UpdateUserRequest request)
     {
         var user = await _userRepository.GetByIdAsync(id);

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newsletter.Application.Interfaces;
 using Newsletter.Presentation.DTOS;
@@ -15,6 +16,7 @@ public class NewslettersController : ControllerBase
         _newsletterService = newsletterService;
     }
 
+    [Authorize]
     [HttpGet("{userId:guid}")]
     public async Task<IActionResult> GetByUser(Guid userId)
     {
@@ -22,6 +24,7 @@ public class NewslettersController : ControllerBase
         return Ok(newsletters);
     }
 
+    [Authorize]
     [HttpGet("{userId:guid}/newsletter/{newsletterId:guid}")]
     public async Task<IActionResult> GetById(Guid userId, Guid newsletterId)
     {
@@ -35,7 +38,8 @@ public class NewslettersController : ControllerBase
             return NotFound(new { message = ex.Message });
         }
     }
-
+    
+    [Authorize]
     [HttpPost("generate")]
     public async Task<IActionResult> Generate([FromBody] GenerateNewsletterRequest request)
     {
@@ -46,6 +50,7 @@ public class NewslettersController : ControllerBase
         return Ok(newsletter);
     }
 
+    [Authorize]
     [HttpDelete("{userId:guid}")]
     public async Task<IActionResult> DeleteByUser(Guid userId)
     {
@@ -56,6 +61,7 @@ public class NewslettersController : ControllerBase
         return NoContent();
     }
     
+    [Authorize]
     [HttpDelete("{userId:guid}/newsletter/{newsletterId:guid}")]
     public async Task<IActionResult> DeleteByUserAndNewLetterId(Guid userId, Guid newsletterId)
     {

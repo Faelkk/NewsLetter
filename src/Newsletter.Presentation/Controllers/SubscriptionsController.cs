@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newsletter.Application.DTOS.Subscriptions;
 using Newsletter.Application.Interfaces;
@@ -17,6 +18,7 @@ public class SubscriptionsController : ControllerBase
         _subscriptionService = subscriptionService;
     }
 
+    [Authorize]
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
@@ -24,6 +26,7 @@ public class SubscriptionsController : ControllerBase
         return Ok(allSubscriptions);
     }
 
+    [Authorize]
     [HttpGet("{userId:guid}")]
     public async Task<IActionResult> GetByUser(Guid userId)
     {
@@ -34,6 +37,7 @@ public class SubscriptionsController : ControllerBase
         return Ok(subs);
     }
     
+    [Authorize]
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateSubscriptionRequest request)
     {
@@ -49,6 +53,7 @@ public class SubscriptionsController : ControllerBase
         }
     }
     
+    [Authorize]
     [HttpPatch("{id:guid}")]
     public async Task<IActionResult> Update([FromBody] UpdateSubscriptionRequest request, Guid id)
     {
@@ -71,6 +76,7 @@ public class SubscriptionsController : ControllerBase
     }
 
 
+    [Authorize]
     [HttpDelete("{userId:guid}")]
     public async Task<IActionResult> DeleteByUser(Guid userId)
     {
