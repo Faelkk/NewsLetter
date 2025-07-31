@@ -9,3 +9,5 @@ public class NewsletterEntry
     public bool Sent { get; set; } = false;
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 }
+
+

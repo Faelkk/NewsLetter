@@ -41,12 +41,11 @@ public class UserRepository : IUserRepository
     public async Task<User> CreateAsync(User user)
     {
         var sql = @"
-        INSERT INTO Users (id, name, email, plan, interests)
-        VALUES (@Id, @Name, @Email, @Plan, @Interests)
+        INSERT INTO Users (id, name, email, password, interests)
+        VALUES (@Id, @Name, @Email, @Password, @Interests)
         RETURNING *;
     ";
-
-        user.Id = Guid.NewGuid();
+        
 
         var createdUser = await _connection.QuerySingleAsync<User>(sql, user);
         return createdUser;
@@ -59,6 +58,7 @@ public class UserRepository : IUserRepository
         SET name = @Name,
             email = @Email,
             plan = @Plan,
+            password = @Password,
             interests = @Interests
         WHERE id = @Id
         RETURNING *;

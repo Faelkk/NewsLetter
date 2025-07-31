@@ -90,6 +90,7 @@ public class SubscriptionService : ISubscriptionService
             Id: sub.Id,
             UserId: sub.UserId,
             ExternalSubscriptionId: sub.ExternalSubscriptionId,
+            Plan: sub.Plan,
             Provider: sub.Provider,
             Status: sub.Status,
             StartedAt: sub.StartedAt,

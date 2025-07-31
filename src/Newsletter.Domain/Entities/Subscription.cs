@@ -1,3 +1,5 @@
+using Newsletter.Domain.Enums;
+
 namespace Newsletter.Domain.Entities;
 
 public class Subscription
@@ -6,7 +8,9 @@ public class Subscription
     public Guid UserId { get; set; }
 
     public string ExternalSubscriptionId { get; set; } = null!;
-    public string Provider { get; set; } = "MercadoPago";
+    public string Provider { get; set; } = "Stripe";
+
+    public SubscriptionPlan Plan { get; set; }
 
     public string Status { get; set; } = "pending";
     public DateTime? StartedAt { get; set; }
@@ -14,5 +18,3 @@ public class Subscription
     public DateTime? CanceledAt { get; set; }
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 }
-
-

@@ -51,7 +51,7 @@ public class UsersController : ControllerBase
     {
         if (request.Name is null &&
             request.Email is null &&
-            request.Plan is null &&
+            request.Password is null &&
             (request.Interests is null || !request.Interests.Any()))
         {
             return BadRequest("É necessário informar ao menos um campo para atualização.");

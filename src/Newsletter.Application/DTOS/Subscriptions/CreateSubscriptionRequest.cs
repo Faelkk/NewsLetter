@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Newsletter.Domain.Enums;
 
 namespace Newsletter.Application.DTOS.Subscriptions;
 
@@ -9,5 +10,8 @@ public record CreateSubscriptionRequest(
     string ExternalSubscriptionId,
 
     [Required(ErrorMessage = "O provedor é obrigatório.")]
-    string Provider
+    string Provider,
+    
+    [Required(ErrorMessage = "O plano é obrigatório.")]
+    SubscriptionPlan Plan
 );

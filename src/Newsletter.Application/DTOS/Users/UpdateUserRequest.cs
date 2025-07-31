@@ -10,6 +10,7 @@ public record UpdateUserRequest(
   
     [MinLength(1, ErrorMessage = "Informe pelo menos um interesse.")]
     List<string>? Interests,
-  
-    string? Plan
+      
+   [MinLength(8, ErrorMessage = "A password deve conter 8 caracteres no minimo.")]
+   string? Password
 );

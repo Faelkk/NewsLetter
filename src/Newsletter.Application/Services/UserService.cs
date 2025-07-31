@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Newsletter.Application.DTOS.Users;
 using Newsletter.Application.Interfaces;
 using Newsletter.Domain.Entities;
@@ -8,11 +9,15 @@ namespace Newsletter.Application.Services;
 public class UserService : IUserService
 {
     private readonly IUserRepository _userRepository;
+    private readonly PasswordHasher<User> _passwordHasher;
 
-    public UserService(IUserRepository userRepository)
+
+    public UserService(IUserRepository userRepository, PasswordHasher<User> passwordHasher)
     {
         _userRepository = userRepository;
+        _passwordHasher = passwordHasher;
     }
+
     
     public async Task<IEnumerable<UserDto>> GetAsync()
     {
@@ -22,7 +27,7 @@ public class UserService : IUserService
             Id: user.Id,
             Name: user.Name,
             Email: user.Email,
-            Plan: user.Plan,
+
             Interests: user.Interests.ToList()
         ));
     }
@@ -38,7 +43,6 @@ public class UserService : IUserService
             Id: user.Id,
             Name: user.Name,
             Email: user.Email,
-            Plan: user.Plan,
             Interests: user.Interests.ToList()
         );
     }
@@ -50,13 +54,18 @@ public class UserService : IUserService
         var existingUser = await _userRepository.GetByIdEmail(request.Email);
         if (existingUser is not null)
             throw new Exception("E-mail já cadastrado.");
-        
+
+        var id = Guid.NewGuid();  
+
+        var hashedPassword = _passwordHasher.HashPassword(null!, request.Password);
+
         var user = new User
         {
+            Id = id,
             Name = request.Name,
             Email = request.Email,
-            Plan = request.Plan ?? "free",
-           Interests = request.Interests?.ToArray() ?? Array.Empty<string>()
+            Interests = request.Interests?.ToArray() ?? Array.Empty<string>(),
+            Password = hashedPassword
         };
 
         var createdUser = await _userRepository.CreateAsync(user);
@@ -65,38 +74,46 @@ public class UserService : IUserService
             Id: createdUser.Id,
             Name: createdUser.Name,
             Email: createdUser.Email,
-            Plan: createdUser.Plan,
             Interests: createdUser.Interests.ToList()
         );
     }
-
+    
     public async Task<UserDto?> UpdateAsync(Guid id, UpdateUserRequest request)
     {
         var user = await _userRepository.GetByIdAsync(id);
         if (user is null)
             return null;
 
-        user.Name = request.Name ?? user.Name;
-        user.Email = request.Email ?? user.Email;
-        user.Plan = request.Plan ?? user.Plan;
-
+        var updatedInterests = user.Interests;
         if (request.Interests is not null && request.Interests.Any())
         {
-            var mergedInterests = user.Interests
+            updatedInterests = user.Interests
                 .Union(request.Interests, StringComparer.OrdinalIgnoreCase)
                 .ToArray();
-
-            user.Interests = mergedInterests;
+        }
+        
+        var updatedPassword = user.Password;
+        if (!string.IsNullOrEmpty(request.Password))
+        {
+            updatedPassword = _passwordHasher.HashPassword(user, request.Password);
         }
 
-        var updatedUser = await _userRepository.UpdateAsync(user);
+        var updatedUser = new User
+        {
+            Id = user.Id,
+            Name = request.Name ?? user.Name,
+            Email = request.Email ?? user.Email,
+            Password = updatedPassword,
+            Interests = updatedInterests
+        };
+
+        var resultUser = await _userRepository.UpdateAsync(updatedUser);
 
         return new UserDto(
-            Id: updatedUser.Id,
-            Name: updatedUser.Name,
-            Email: updatedUser.Email,
-            Plan: updatedUser.Plan,
-            Interests: updatedUser.Interests.ToList()
+            Id: resultUser.Id,
+            Name: resultUser.Name,
+            Email: resultUser.Email,
+            Interests: resultUser.Interests.ToList()
         );
     }
 
@@ -105,6 +122,14 @@ public class UserService : IUserService
     {
         return await _userRepository.DeleteAsync(id);
     }
+    
+    public bool VerifyPassword(User user, string password)
+    {
+        var result = _passwordHasher.VerifyHashedPassword(user, user.Password, password);
+        return result == PasswordVerificationResult.Success;
+    }
+
 }
+
 
 
