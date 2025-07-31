@@ -1,9 +1,12 @@
+using Microsoft.AspNetCore.Identity;
 using Newsletter.Application.Interfaces;
 using Newsletter.Application.Services;
 using Newsletter.Domain.Interfaces;
 using Newsletter.Infrastructure.Context;
 using Newsletter.Infrastructure.Repository;
 using Newsletter.Infrastructure.Seed;
+using Newsletter.Infrastructure.Services;
+using Newsletter.Infrastructure.Settings;
 using Newsletter.Presentation.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,11 +19,20 @@ builder.Services.AddScoped<INewsletterService, NewsletterService>();
 builder.Services.AddScoped<INewsletterRepository, NewsletterRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ISubscriptionRepository, SubscriptionRepository>();
+builder.Services.AddScoped<IJwtService, JwtService>();
+
 builder.Services.AddScoped<DatabaseSeed>();
+builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
+builder.Services.AddAuthorization();
+
 
 builder.Services.AddOpenApi();
 
 builder.Services.AddControllers();
+
+
+
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
@@ -54,6 +66,9 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
 app.UseSwagger();

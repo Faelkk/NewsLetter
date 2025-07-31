@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Identity;
 using Newsletter.Application.DTOS.Users;
 using Newsletter.Application.Interfaces;
 using Newsletter.Domain.Entities;
@@ -9,15 +8,14 @@ namespace Newsletter.Application.Services;
 public class UserService : IUserService
 {
     private readonly IUserRepository _userRepository;
-    private readonly PasswordHasher<User> _passwordHasher;
+    private readonly IPasswordHasher _passwordHasher;
 
 
-    public UserService(IUserRepository userRepository, PasswordHasher<User> passwordHasher)
+    public UserService(IUserRepository userRepository, IPasswordHasher passwordHasher)
     {
         _userRepository = userRepository;
         _passwordHasher = passwordHasher;
     }
-
     
     public async Task<IEnumerable<UserDto>> GetAsync()
     {
@@ -123,11 +121,6 @@ public class UserService : IUserService
         return await _userRepository.DeleteAsync(id);
     }
     
-    public bool VerifyPassword(User user, string password)
-    {
-        var result = _passwordHasher.VerifyHashedPassword(user, user.Password, password);
-        return result == PasswordVerificationResult.Success;
-    }
 
 }
 

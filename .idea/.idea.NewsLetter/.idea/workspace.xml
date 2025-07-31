@@ -8,15 +8,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e3e925c3-4186-4082-9bc0-1e01e104e7c2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.NewsLetter/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.NewsLetter/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Domain/Entities/NewsletterEntry.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Domain/Entities/Newsletter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Domain/Entities/Subscription.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Domain/Entities/Subscription.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Domain/Entities/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Domain/Entities/User.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Context/DatabaseContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Context/DatabaseContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Presentation/Newsletter.Presentation.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Presentation/Newsletter.Presentation.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Presentation/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Presentation/Program.cs" afterDir="false" />
-    </list>
+    <list default="true" id="e3e925c3-4186-4082-9bc0-1e01e104e7c2" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -38,13 +30,19 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock://C:/Users/achte/OneDrive/Documentos/csharp-projects/NewsLetter/src/Newsletter.Domain/Entities/User.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/achte/OneDrive/Documentos/csharp-projects/NewsLetter/src/Newsletter.Application/DTOS/Subscriptions/CreateSubscriptionRequest.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/achte/OneDrive/Documentos/csharp-projects/NewsLetter/src/Newsletter.Application/DTOS/Subscriptions/CreateSubscriptionRequest.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/achte/OneDrive/Documentos/csharp-projects/NewsLetter/src/Newsletter.Infrastructure/Seed/DatabaseSeed.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/achte/OneDrive/Documentos/csharp-projects/NewsLetter/src/Newsletter.Presentation/appsettings.json" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
 }</component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 6
@@ -70,7 +68,13 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
+    ]
   }
 }</component>
   <component name="RunManager" selected="Docker.compose.yaml: Compose Deployment">
@@ -175,6 +179,7 @@
       <option name="presentableId" value="Default" />
       <updated>1753811828912</updated>
       <workItem from="1753811830402" duration="21675000" />
+      <workItem from="1753887812451" duration="26880000" />
     </task>
     <task id="LOCAL-00001" summary="Feat: initial structure">
       <option name="closed" value="true" />
@@ -200,7 +205,55 @@
       <option name="project" value="LOCAL" />
       <updated>1753839155270</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="feat: integrate services with repositories, update controller returns,fix DTO namespace, and add global exception middleware">
+      <option name="closed" value="true" />
+      <created>1753898509307</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1753898509307</updated>
+    </task>
+    <task id="LOCAL-00005" summary="fix: remove using duplicate namespace">
+      <option name="closed" value="true" />
+      <created>1753898566363</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1753898566363</updated>
+    </task>
+    <task id="LOCAL-00006" summary="feat: add database seed for generate tables">
+      <option name="closed" value="true" />
+      <created>1753906195333</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1753906195333</updated>
+    </task>
+    <task id="LOCAL-00007" summary="feat: add querys in user,subscriptions and newsletter repository">
+      <option name="closed" value="true" />
+      <created>1753914070088</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1753914070088</updated>
+    </task>
+    <task id="LOCAL-00008" summary="fix: integrate newsletter repository and add DELETE route for newsletter by ID">
+      <option name="closed" value="true" />
+      <created>1753916100558</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1753916100558</updated>
+    </task>
+    <task id="LOCAL-00009" summary="refactor: update entities, DTOs, queries, and add SubscriptionPlan enum">
+      <option name="closed" value="true" />
+      <created>1753921726246</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1753921726246</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -213,7 +266,13 @@
     <MESSAGE value="Feat: initial structure" />
     <MESSAGE value="Feat: add entities in domain layer" />
     <MESSAGE value="feat: add repository,services,dtos and controllers, add docker compose and docker file and git ignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: add repository,services,dtos and controllers, add docker compose and docker file and git ignore" />
+    <MESSAGE value="feat: integrate services with repositories, update controller returns,fix DTO namespace, and add global exception middleware" />
+    <MESSAGE value="fix: remove using duplicate namespace" />
+    <MESSAGE value="feat: add database seed for generate tables" />
+    <MESSAGE value="feat: add querys in user,subscriptions and newsletter repository" />
+    <MESSAGE value="fix: integrate newsletter repository and add DELETE route for newsletter by ID" />
+    <MESSAGE value="refactor: update entities, DTOs, queries, and add SubscriptionPlan enum" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: update entities, DTOs, queries, and add SubscriptionPlan enum" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
