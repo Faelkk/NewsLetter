@@ -25,6 +25,12 @@ public class SubscriptionRepository : ISubscriptionRepository
         var sql = "SELECT * FROM Subscriptions WHERE user_id = @userId";
         return await _connection.QueryFirstOrDefaultAsync<Subscription>(sql, new { userId });
     }
+    
+    public async Task<Subscription?> GetBySubscriptionIdAsync(Guid Id)
+    {
+        var sql = "SELECT * FROM Subscriptions WHERE id = @Id";
+        return await _connection.QueryFirstOrDefaultAsync<Subscription>(sql, new { Id });
+    }
 
     public async Task<Subscription> CreateAsync(Subscription subscription)
     {

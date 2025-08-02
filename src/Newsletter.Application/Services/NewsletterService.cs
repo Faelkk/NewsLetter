@@ -15,6 +15,7 @@ public class NewsletterService : INewsletterService
         _newsLetterRepository = repository;
         _userRepository = userRepository;
     }
+    
 
     public async Task<IEnumerable<NewsletterDto>> GetByUserIdAsync(Guid userId)
     {

@@ -9,6 +9,7 @@ public interface ISubscriptionRepository
     Task<IEnumerable<Subscription>> GetAllAsync();
     
     Task<Subscription?> GetByUserIdAsync(Guid userId);
+    Task<Subscription?> GetBySubscriptionIdAsync(Guid subscriptionId);
 
     Task<Subscription> CreateAsync(Subscription subscription);
     
