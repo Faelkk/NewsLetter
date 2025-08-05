@@ -1,4 +1,4 @@
-using Newsletter.Domain.Enums;
+
 
 namespace Newsletter.Domain.Entities;
 
@@ -7,10 +7,10 @@ public class Subscription
     public Guid Id { get; set; }
     public Guid UserId { get; set; }
 
-    public string ExternalSubscriptionId { get; set; } = null!;
+    public string? ExternalSubscriptionId { get; set; }
     public string Provider { get; set; } = "Stripe";
 
-    public SubscriptionPlan Plan { get; set; }
+    public string Plan { get; set; }
 
     public string Status { get; set; } = "pending";
     public DateTime? StartedAt { get; set; }
@@ -18,3 +18,4 @@ public class Subscription
     public DateTime? CanceledAt { get; set; }
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 }
+

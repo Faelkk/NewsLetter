@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Newsletter.Application.DTOS.Payments;
+using Newsletter.Application.Interfaces;
 using Newsletter.Application.UseCases;
 using Newsletter.Infrastructure.Stripe;
 using Stripe;
@@ -10,14 +11,14 @@ namespace Newsletter.Presentation.Controllers;
 [Route("payments")]
 public class PaymentsController : ControllerBase
 {
-    private readonly CreateCheckoutSession _createCheckoutSession;
-    private readonly StripeWebhookHandler _webhookHandler;
+    private readonly ICreateCheckoutSession _createCheckoutSession;
+    private readonly IStripeWebhookHandler _webhookHandler;
     private readonly ILogger<PaymentsController> _logger;
     private readonly IConfiguration _configuration;
 
     public PaymentsController(
-        CreateCheckoutSession createCheckoutSession,
-        StripeWebhookHandler webhookHandler,
+        ICreateCheckoutSession createCheckoutSession,
+        IStripeWebhookHandler webhookHandler,
         ILogger<PaymentsController> logger,
         IConfiguration configuration)
     {
@@ -32,7 +33,7 @@ public class PaymentsController : ControllerBase
     public async Task<IActionResult> CreateCheckoutSession([FromBody] CreateCheckoutSessionRequest request)
     {
         var sessionUrl = await _createCheckoutSession.ExecuteAsync(request);
-        return Ok(new { Url = sessionUrl });
+        return Ok(new { Url = sessionUrl });    
     }
 
 
@@ -40,12 +41,15 @@ public class PaymentsController : ControllerBase
     public async Task<IActionResult> StripeWebhook()
     {
         var json = await new StreamReader(HttpContext.Request.Body).ReadToEndAsync();
-        var signature = Request.Headers["Stripe-Signature"];
-
+        
         try
         {
             var secret = _configuration["Stripe:WebhookSecret"];
-            var stripeEvent = EventUtility.ConstructEvent(json, signature, secret);
+            var stripeEvent = EventUtility.ConstructEvent(
+                json,
+                Request.Headers["Stripe-Signature"],
+                secret
+            );
 
             await _webhookHandler.HandleAsync(stripeEvent);
             return Ok();
@@ -57,3 +61,6 @@ public class PaymentsController : ControllerBase
         }
     }
 }
+
+
+

@@ -37,15 +37,19 @@ public class SubscriptionService : ISubscriptionService
     {
         var user = await _userRepository.GetByIdAsync(request.UserId);
         if (user is null)
-            throw new Exception("Usuário não encontrado."); 
+            throw new Exception("Usuário não encontrado.");
+
+        var existingSubscription = await _subscriptionRepository.GetByUserIdAsync(request.UserId);
+        if (existingSubscription != null)
+            throw new Exception("Usuário já possui uma assinatura.");
 
         var entity = new Subscription
         {
             Id = Guid.NewGuid(),
             UserId = request.UserId,
-            ExternalSubscriptionId = request.ExternalSubscriptionId,
-            Provider = request.Provider ?? "MercadoPago",
-            Status = "active",
+            ExternalSubscriptionId = null,
+            Provider = request.Provider ?? "Stripe",
+            Status = "pending",
             StartedAt = DateTime.UtcNow,
             ExpiresAt = DateTime.UtcNow.AddMonths(1),
             CanceledAt = null,
@@ -53,10 +57,10 @@ public class SubscriptionService : ISubscriptionService
         };
 
         var created = await _subscriptionRepository.CreateAsync(entity);
-        
-        Console.WriteLine("Created",created.Id);
+    
         return MapToDto(created);
     }
+
 
     public async Task<SubscriptionDto?> UpdateAsync(UpdateSubscriptionRequest request, Guid id)
     {

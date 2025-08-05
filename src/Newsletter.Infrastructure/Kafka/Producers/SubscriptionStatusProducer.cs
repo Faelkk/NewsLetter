@@ -2,10 +2,11 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Confluent.Kafka;
 using Microsoft.Extensions.Logging;
+using Newsletter.Infrastructure.Stripe;
 
 namespace Newsletter.Infrastructure.Kafka.Producers;
 
-public class SubscriptionStatusProducer
+public class SubscriptionStatusProducer : ISubscriptionStatusProducer
 {
     private readonly IProducer<string, string> _producer;
     private readonly ILogger<SubscriptionStatusProducer> _logger;
@@ -18,7 +19,7 @@ public class SubscriptionStatusProducer
 
         var config = new ProducerConfig
         {
-            BootstrapServers = "localhost:9092" 
+            BootstrapServers = "broker:9092"
         };
 
         _producer = new ProducerBuilder<string, string>(config).Build();

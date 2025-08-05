@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-using Newsletter.Domain.Enums;
+
 
 namespace Newsletter.Application.DTOS.Users;
 
@@ -15,5 +15,5 @@ public record UpdateUserRequest(
    [MinLength(8, ErrorMessage = "A password deve conter 8 caracteres no minimo.")]
    string? Password,
   
-    EnumRoles? Role
+    string? Role
 );

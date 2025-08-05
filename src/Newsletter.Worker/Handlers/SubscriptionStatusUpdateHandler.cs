@@ -20,18 +20,25 @@ public class SubscriptionStatusUpdateHandler
     }
     
     public async Task HandleAsync(SubscriptionStatusUpdatedEvent @event)
+{
+    _logger.LogInformation("Processing event for SubscriptionId {Id}", @event.SubscriptionId);
+
+    var success = await _useCase.ExecuteAsync(new ConfirmSubscriptionRequest
     {
-        _logger.LogInformation("Processing event for SubscriptionId {Id}", @event.SubscriptionId);
+        SubscriptionId = @event.SubscriptionId,
+        Status = @event.Status,
+        ExternalSubscriptionId = @event.ExternalSubscriptionId
+    });
 
-        var success = await _useCase.ExecuteAsync(new ConfirmSubscriptionRequest()
-        {
-            SubscriptionId = @event.SubscriptionId,
-            Status = @event.Status
-        });
-
-        if (success)
-            _logger.LogInformation("Subscription status updataed successfully");
-        else
-            _logger.LogWarning("Failed to update subscription status");
-    }
+    if (success)
+        _logger.LogInformation("Subscription status updated successfully");
+    else
+        _logger.LogWarning("Failed to update subscription status");
 }
+
+}
+
+
+
+
+

@@ -1,7 +1,6 @@
 using Newsletter.Application.DTOS.Users;
 using Newsletter.Application.Interfaces;
 using Newsletter.Domain.Entities;
-using Newsletter.Domain.Enums;
 using Newsletter.Domain.Interfaces;
 
 namespace Newsletter.Application.Services;
@@ -68,7 +67,7 @@ public class UserService : IUserService
             Email = request.Email,
             Interests = request.Interests?.ToArray() ?? Array.Empty<string>(),
             Password = hashedPassword,
-            Role = EnumRoles.User,
+            Role = "User",
         };
 
         var createdUser = await _userRepository.CreateAsync(user);
@@ -143,6 +142,7 @@ public class UserService : IUserService
     
 
 }
+
 
 
 

@@ -4,4 +4,7 @@ public class ConfirmSubscriptionRequest
 {
     public Guid SubscriptionId { get; set; }
     public string Status { get; set; }
+    public string ExternalSubscriptionId { get; set; } = null!;
 }
+
+

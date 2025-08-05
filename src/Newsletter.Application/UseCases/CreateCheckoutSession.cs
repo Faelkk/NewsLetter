@@ -3,7 +3,7 @@ using Newsletter.Application.Interfaces;
 
 namespace Newsletter.Application.UseCases;
 
-public class CreateCheckoutSession
+public class CreateCheckoutSession: ICreateCheckoutSession
 {
     private readonly IStripeCheckoutService _stripeService;
     

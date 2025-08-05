@@ -16,16 +16,16 @@ public class StripeCheckoutService : IStripeCheckoutService
         StripeConfiguration.ApiKey = _stripeSettings.SecretKey;
     }
 
-    public async Task<string> CreateCheckoutSessionAsync(CreateCheckoutSessionRequest request)
+    public async Task<string> CreateCheckoutSessionAsync(CreateCheckoutSessionRequest request) 
     {
-        var options = new SessionCreateOptions()
+        var options = new SessionCreateOptions
         {
             PaymentMethodTypes = new List<string> { "card" },
             LineItems = new List<SessionLineItemOptions>
             {
-                new()
+                new SessionLineItemOptions
                 {
-                    Price = request.PlanId,
+                    Price = request.PlanId, 
                     Quantity = 1
                 }
             },
@@ -33,18 +33,18 @@ public class StripeCheckoutService : IStripeCheckoutService
             SuccessUrl = request.SuccessUrl,
             CancelUrl = request.CancelUrl,
             ClientReferenceId = request.UserId.ToString(),
-
             SubscriptionData = new SessionSubscriptionDataOptions
             {
                 Metadata = new Dictionary<string, string>
                 {
-                    { "subscription_id", request.SubscriptionId.ToString() } 
+                    { "subscription_id", request.SubscriptionId.ToString() }
                 }
             }
         };
 
         var service = new SessionService();
-        Session session = await service.CreateAsync(options);
+        var session = await service.CreateAsync(options);
         return session.Url;
     }
 }
+

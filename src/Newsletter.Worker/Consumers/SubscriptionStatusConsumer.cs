@@ -19,10 +19,12 @@ public class SubscriptionStatusConsumer : BackgroundService
         _handler = handler;
         var config =  new ConsumerConfig
         {
-            BootstrapServers = "localhost:9092",
+            BootstrapServers = "broker:9092", 
             GroupId = "newsletter-subscription-group",
             AutoOffsetReset = AutoOffsetReset.Earliest
         };
+
+        
         
         _consumer = new ConsumerBuilder<string, string>(config).Build();
         _consumer.Subscribe("subscription-status-updated");
@@ -50,10 +52,12 @@ public class SubscriptionStatusConsumer : BackgroundService
         }
     }
 
-    public override void Dispose()
+    public override void Dispose()  
     {
         _consumer.Close();
         _consumer.Dispose();
         base.Dispose();
     }
 }
+
+

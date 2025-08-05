@@ -17,6 +17,6 @@ public record CreateCheckoutSessionRequest(
     [Url(ErrorMessage = "CancelUrl must be a valid URL.")]
     string CancelUrl,
     
-    [Required(ErrorMessage = "PlanId is required.")]
+    [Required(ErrorMessage = "Subscription id is required.")]
     Guid SubscriptionId 
 );

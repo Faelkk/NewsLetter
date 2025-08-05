@@ -1,4 +1,4 @@
-using Newsletter.Domain.Enums;
+
 
 namespace Newsletter.Application.DTOS.Subscriptions;
 
@@ -8,7 +8,7 @@ public record SubscriptionDto(
     string ExternalSubscriptionId,
     string Provider,
     string Status,
-    SubscriptionPlan Plan,
+    string Plan,
     DateTime? StartedAt,
     DateTime? ExpiresAt,
     DateTime? CanceledAt,

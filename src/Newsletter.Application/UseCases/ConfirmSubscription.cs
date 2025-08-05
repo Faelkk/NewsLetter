@@ -15,7 +15,6 @@ public class ConfirmSubscriptionStatus : IConfirmSubscriptionStatus
 
     public async Task<bool> ExecuteAsync(ConfirmSubscriptionRequest request)
     {
-
         var subscription = await _subscriptionRepository.GetBySubscriptionIdAsync(request.SubscriptionId);
         if (subscription == null) return false;
 
@@ -23,7 +22,13 @@ public class ConfirmSubscriptionStatus : IConfirmSubscriptionStatus
         subscription.UpdatedAt = DateTime.UtcNow;
         subscription.StartedAt = DateTime.UtcNow;
 
+        subscription.ExternalSubscriptionId = request.ExternalSubscriptionId;
+
         await _subscriptionRepository.UpdateAsync(subscription);
         return true;
     }
+
 }
+
+
+

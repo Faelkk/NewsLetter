@@ -1,9 +1,10 @@
+using Newsletter.Application.Interfaces;
 using Newsletter.Domain.Entities;
 using Newsletter.Domain.Interfaces;
 
 namespace Newsletter.Application.UseCases;
 
-public class GetSubscriptionStatus
+public class GetSubscriptionStatus : IGetSubscriptionStatus
 {
     private readonly ISubscriptionRepository _subscriptionRepository;
 
