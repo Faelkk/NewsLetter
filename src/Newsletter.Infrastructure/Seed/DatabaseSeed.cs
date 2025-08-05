@@ -28,6 +28,9 @@ namespace Newsletter.Infrastructure.Seed
 
         private void CreateTables(IDbConnection connection)
 {
+    
+    var dropSubscriptions = "DROP TABLE IF EXISTS Subscriptions;";
+    
     var createUsers = """
         CREATE TABLE IF NOT EXISTS Users (
             id UUID PRIMARY KEY,
@@ -42,18 +45,21 @@ namespace Newsletter.Infrastructure.Seed
     var createEmailIndex = """
         CREATE UNIQUE INDEX IF NOT EXISTS idx_users_email ON users(email);
     """;
-
+    
+    
     var createSubscriptions = """
         CREATE TABLE IF NOT EXISTS Subscriptions (
             id UUID PRIMARY KEY,
             user_id UUID NOT NULL,
             external_subscription_id TEXT,
+            plan TEXT,
             provider TEXT NOT NULL,
             status TEXT NOT NULL,
             started_at TIMESTAMP,
             expires_at TIMESTAMP,
             canceled_at TIMESTAMP,
             updated_at TIMESTAMP NOT NULL
+          
         );
     """;
 
@@ -70,7 +76,8 @@ namespace Newsletter.Infrastructure.Seed
             created_at TIMESTAMP NOT NULL
         );
     """;
-
+    
+    connection.Execute(dropSubscriptions);
     connection.Execute(createUsers);
     connection.Execute(createEmailIndex);
     connection.Execute(createSubscriptions);

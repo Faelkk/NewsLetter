@@ -22,12 +22,15 @@ public class SubscriptionStatusUpdateHandler
     public async Task HandleAsync(SubscriptionStatusUpdatedEvent @event)
 {
     _logger.LogInformation("Processing event for SubscriptionId {Id}", @event.SubscriptionId);
-
+    _logger.LogInformation("Payload recebido: {@event}");
+    Console.WriteLine("entrou no handle aq do kafka");
     var success = await _useCase.ExecuteAsync(new ConfirmSubscriptionRequest
     {
         SubscriptionId = @event.SubscriptionId,
         Status = @event.Status,
-        ExternalSubscriptionId = @event.ExternalSubscriptionId
+        ExternalSubscriptionId = @event.ExternalSubscriptionId,
+        PlanId =  @event.PlanId
+        
     });
 
     if (success)

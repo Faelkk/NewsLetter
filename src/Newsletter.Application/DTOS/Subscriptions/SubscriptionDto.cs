@@ -13,3 +13,5 @@ public record SubscriptionDto(
     DateTime? ExpiresAt,
     DateTime? CanceledAt,
     DateTime UpdatedAt);
+    
+    

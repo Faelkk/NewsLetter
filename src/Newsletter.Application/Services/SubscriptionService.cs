@@ -48,6 +48,7 @@ public class SubscriptionService : ISubscriptionService
             Id = Guid.NewGuid(),
             UserId = request.UserId,
             ExternalSubscriptionId = null,
+            Plan = null,
             Provider = request.Provider ?? "Stripe",
             Status = "pending",
             StartedAt = DateTime.UtcNow,
@@ -69,6 +70,7 @@ public class SubscriptionService : ISubscriptionService
             return null;
 
         existing.ExternalSubscriptionId = request.ExternalSubscriptionId ?? existing.ExternalSubscriptionId;
+        existing.Plan = request.Plan ?? existing.Plan; 
         existing.Provider = request.Provider ?? existing.Provider;
         existing.Status = request.Status ?? existing.Status;
         existing.StartedAt = request.StartedAt ?? existing.StartedAt;

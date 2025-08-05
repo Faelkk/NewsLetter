@@ -1,0 +1,22 @@
+# This is a generated file. Not intended for manual editing.
+services:
+  newsletter:
+    build:
+      context: "C:\\Users\\achte\\OneDrive\\Documentos\\csharp-projects\\NewsLetter"
+      dockerfile: "src/Newsletter.Presentation/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net9.0/Newsletter.Presentation.dll"
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "newsletter.presentation:dev"
+    ports: []
+    volumes:
+    - "C:\\Users\\achte\\OneDrive\\Documentos\\csharp-projects\\NewsLetter\\src\\\
+      Newsletter.Presentation:/app:rw"
+    - "C:\\Users\\achte\\OneDrive\\Documentos\\csharp-projects\\NewsLetter:/src:rw"
+    - "C:\\Users\\achte\\.nuget\\packages:/root/.nuget/packages"
+    working_dir: "/app"

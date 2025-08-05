@@ -19,7 +19,7 @@ namespace Newsletter.Infrastructure.Stripe
 
         public async Task HandleAsync(Event stripeEvent)
         {
-            _logger.LogInformation("Evento Stripe recebido: {Type}", stripeEvent.Type);
+      
 
             switch (stripeEvent.Type)
             {
@@ -34,21 +34,18 @@ namespace Newsletter.Infrastructure.Stripe
                             Expand = new List<string> { "subscription" }
                         });
                     
-                    Console.WriteLine($"Session: {session}");
 
                     var subscriptionId = session.Subscription?.Id;
 
                     if (subscriptionId == null)
                     {
-                        Console.WriteLine("Subscription ID não encontrado na session");
                         throw new ArgumentNullException("Subscription ID não encontrado na session");
                     }
 
                     var subscriptionService = new SubscriptionService();
                     var fullSubscription = await subscriptionService.GetAsync(subscriptionId);
-
-                    Console.WriteLine($"Subscription ID: {fullSubscription.Id}");
-                    Console.WriteLine($"Subscription Metadata: {System.Text.Json.JsonSerializer.Serialize(fullSubscription.Metadata)}");
+                    var priceId = fullSubscription.Items.Data.FirstOrDefault()?.Price.Id;
+                    
 
                     var metadata = fullSubscription.Metadata;
 
@@ -58,16 +55,18 @@ namespace Newsletter.Infrastructure.Stripe
 
                         var payload = new
                         {
-                            SubscriptionId = subscriptionId,
+                            SubscriptionId = subscriptionIdMetaData,
                             Status = "Active",
-                            ExternalSubscriptionId = subscriptionIdMetaData
+                            ExternalSubscriptionId = subscriptionId,
+                            PlanId = priceId
                         };
+                        
+                        Console.WriteLine("entrou aq e deu publish");
 
                         await _producer.PublishAsync(payload);
                     }
                     else
                     {
-                        Console.WriteLine("Metadata 'subscription_id' não encontrada na subscription");
                         throw new ArgumentNullException("Metadata 'subscription_id' não encontrada na subscription");
                     }
 
@@ -75,7 +74,6 @@ namespace Newsletter.Infrastructure.Stripe
                 }
 
                 default:
-                    _logger.LogWarning("Evento Stripe não tratado: {Type}", stripeEvent.Type);
                     break;
             }
         }

@@ -10,39 +10,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e3e925c3-4186-4082-9bc0-1e01e104e7c2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Newsletter.Application/Interfaces/ICreateCheckoutSession.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Newsletter.Application/Interfaces/IGetSubscriptionStatus.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Newsletter.Application/Interfaces/IStripeWebhookHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Interfaces/IStripeWebhookHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Interfaces/ISubscriptionStatusProducer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.NewsLetter/.idea/material_theme_project_new.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.NewsLetter/Docker/compose.generated.override.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NewsLetter.sln.DotSettings.user" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Presentation/appsettings.Development.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Worker/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Worker/KafkaAdmin/CreateTopicProgram.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Worker/Newsletter.Worker.csproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Worker/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.NewsLetter/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.NewsLetter/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/compose.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Application/DTOS/Payments/CreateCheckoutSessionRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Application/DTOS/Payments/CreateCheckoutSessionRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Application/DTOS/Subscriptions/CreateSubscriptionRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Application/DTOS/Subscriptions/CreateSubscriptionRequest.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Newsletter.Application/DTOS/Subscriptions/SubscriptionDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Application/DTOS/Subscriptions/SubscriptionDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Application/DTOS/Subscriptions/UpdateSubscriptionRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Application/DTOS/Subscriptions/UpdateSubscriptionRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Application/DTOS/Users/UpdateUserRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Application/DTOS/Users/UpdateUserRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Application/DTOS/Users/UserDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Application/DTOS/Users/UserDto.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Newsletter.Application/Events/ConfirmSubscriptionRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Application/Events/ConfirmSubscriptionRequest.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Newsletter.Application/Events/SubscriptionStatusUpdatedEvent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Application/Events/SubscriptionStatusUpdatedEvent.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Newsletter.Application/Services/SubscriptionService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Application/Services/SubscriptionService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Application/Services/UserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Application/Services/UserService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Newsletter.Application/UseCases/ConfirmSubscription.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Application/UseCases/ConfirmSubscription.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Application/UseCases/CreateCheckoutSession.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Application/UseCases/CreateCheckoutSession.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Application/UseCases/GetSubscriptionStatus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Application/UseCases/GetSubscriptionStatus.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Newsletter.Domain/Entities/Subscription.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Domain/Entities/Subscription.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Domain/Entities/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Domain/Entities/User.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Domain/Enums/EnumRoles.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Domain/Enums/SubscriptionPlan.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Kafka/Producers/SubscriptionStatusProducer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Kafka/Producers/SubscriptionStatusProducer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Repository/SubscriptionRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Repository/SubscriptionRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Seed/DatabaseSeed.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Seed/DatabaseSeed.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Stripe/StripeCheckoutService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Stripe/StripeCheckoutService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Stripe/StripeSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Stripe/StripeSettings.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Stripe/StripeWebhookHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Stripe/StripeWebhookHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Presentation/Controllers/PaymentsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Presentation/Controllers/PaymentsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Presentation/Controllers/SubscriptionsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Presentation/Controllers/SubscriptionsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Presentation/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Presentation/Controllers/UserController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Presentation/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Presentation/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Newsletter.Worker/Consumers/SubscriptionStatusConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Worker/Consumers/SubscriptionStatusConsumer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Newsletter.Worker/Handlers/SubscriptionStatusUpdateHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Worker/Handlers/SubscriptionStatusUpdateHandler.cs" afterDir="false" />
     </list>
@@ -54,6 +42,13 @@
   <component name="DpaMonitoringSettings">
     <option name="firstShow" value="false" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JSON File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -63,17 +58,18 @@
     &quot;assignee&quot;: &quot;Faelkk&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/Faelkk/NewsLetter.git&quot;,
-    &quot;accountId&quot;: &quot;66ed7ba1-8cc8-46ef-a0a6-4c67af1cb799&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Faelkk/NewsLetter.git",
+    "accountId": "180800af-63dd-4ab4-883d-43439598d63e"
   }
-}</component>
+}]]></component>
   <component name="HighlightingSettingsPerFile">
     <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/35089616d11149d390374bacc63c53616e400/58/5f4e2915/IProducer`2.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/35d6e78970da402f83e2e6d9a1f690921de910/18/50dc9e94/ActionMethodExecutor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b95edcc1c50e44ebbf7efbbca83c493ee8e928/a0/046fa94b/Dictionary`2.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b95edcc1c50e44ebbf7efbbca83c493ee8e928/b8/2f5fb1bf/ExceptionDispatchInfo.cs" root0="FORCE_HIGHLIGHTING" />
@@ -200,6 +196,18 @@
       <EXTENSION ID="com.jetbrains.rider.docker.debug" isFastModeEnabled="true" isSslEnabled="false" />
       <method v="2" />
     </configuration>
+    <configuration name="Newsletter.Worker/Dockerfile" type="docker-deploy" factoryName="dockerfile" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="imageTag" value="newsletter.worker" />
+          <option name="containerName" value="newsletter.worker" />
+          <option name="contextFolderPath" value="C:\Users\achte\OneDrive\Documentos\csharp-projects\NewsLetter" />
+          <option name="sourceFilePath" value="src/Newsletter.Worker/Dockerfile" />
+        </settings>
+      </deployment>
+      <EXTENSION ID="com.jetbrains.rider.docker.debug" isFastModeEnabled="true" isSslEnabled="false" />
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
       <deployment type="docker-compose.yml">
         <settings />
@@ -241,6 +249,7 @@
       <item itemvalue=".NET Launch Settings Profile.Newsletter.Presentation: http" />
       <item itemvalue=".NET Launch Settings Profile.Newsletter.Presentation: https" />
       <item itemvalue=".NET Project.Newsletter.Worker" />
+      <item itemvalue="Docker.Newsletter.Worker/Dockerfile" />
       <item itemvalue="Docker.compose.yaml: Compose Deployment" />
       <item itemvalue="Docker.Newsletter.Presentation/Dockerfile" />
       <item itemvalue="Docker.src/Newsletter.Presentation/Dockerfile publish" />
@@ -262,7 +271,7 @@
       <workItem from="1753887812451" duration="26880000" />
       <workItem from="1753982398435" duration="9319000" />
       <workItem from="1754303382357" duration="1048000" />
-      <workItem from="1754341728146" duration="6455000" />
+      <workItem from="1754341728146" duration="13248000" />
     </task>
     <task id="LOCAL-00001" summary="Feat: initial structure">
       <option name="closed" value="true" />
@@ -336,7 +345,15 @@
       <option name="project" value="LOCAL" />
       <updated>1753921726246</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="refactor: cleanup enums, add interfaces, update checkout/subscription DTOs and webhook logic, and config in docker compose">
+      <option name="closed" value="true" />
+      <created>1754359043387</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1754359043387</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -355,7 +372,8 @@
     <MESSAGE value="feat: add querys in user,subscriptions and newsletter repository" />
     <MESSAGE value="fix: integrate newsletter repository and add DELETE route for newsletter by ID" />
     <MESSAGE value="refactor: update entities, DTOs, queries, and add SubscriptionPlan enum" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: update entities, DTOs, queries, and add SubscriptionPlan enum" />
+    <MESSAGE value="refactor: cleanup enums, add interfaces, update checkout/subscription DTOs and webhook logic, and config in docker compose" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: cleanup enums, add interfaces, update checkout/subscription DTOs and webhook logic, and config in docker compose" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -387,52 +405,39 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/src/Newsletter.Infrastructure/Stripe/StripeWebhookHandler.cs</url>
-          <line>21</line>
-          <properties documentPath="C:\Users\achte\OneDrive\Documentos\csharp-projects\NewsLetter\src\Newsletter.Infrastructure\Stripe\StripeWebhookHandler.cs" containingFunctionPresentation="Method 'HandleAsync'">
-            <startOffsets>
-              <option value="642" />
-            </startOffsets>
-            <endOffsets>
-              <option value="717" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/src/Newsletter.Infrastructure/Stripe/StripeWebhookHandler.cs</url>
           <line>26</line>
           <properties documentPath="C:\Users\achte\OneDrive\Documentos\csharp-projects\NewsLetter\src\Newsletter.Infrastructure\Stripe\StripeWebhookHandler.cs" containingFunctionPresentation="Method 'HandleAsync'">
             <startOffsets>
-              <option value="838" />
+              <option value="757" />
             </startOffsets>
             <endOffsets>
-              <option value="839" />
+              <option value="758" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/src/Newsletter.Infrastructure/Stripe/StripeWebhookHandler.cs</url>
-          <line>38</line>
+          <line>37</line>
           <properties documentPath="C:\Users\achte\OneDrive\Documentos\csharp-projects\NewsLetter\src\Newsletter.Infrastructure\Stripe\StripeWebhookHandler.cs" containingFunctionPresentation="Method 'HandleAsync'">
             <startOffsets>
-              <option value="1309" />
+              <option value="1166" />
             </startOffsets>
             <endOffsets>
-              <option value="1355" />
+              <option value="1212" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/src/Newsletter.Infrastructure/Stripe/StripeWebhookHandler.cs</url>
-          <line>46</line>
+          <line>44</line>
           <properties documentPath="C:\Users\achte\OneDrive\Documentos\csharp-projects\NewsLetter\src\Newsletter.Infrastructure\Stripe\StripeWebhookHandler.cs" containingFunctionPresentation="Method 'HandleAsync'">
             <startOffsets>
-              <option value="1660" />
+              <option value="1429" />
             </startOffsets>
             <endOffsets>
-              <option value="1712" />
+              <option value="1481" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="11" />
@@ -481,10 +486,10 @@
           <line>27</line>
           <properties documentPath="C:\Users\achte\OneDrive\Documentos\csharp-projects\NewsLetter\src\Newsletter.Infrastructure\Stripe\StripeWebhookHandler.cs" containingFunctionPresentation="Method 'HandleAsync'">
             <startOffsets>
-              <option value="860" />
+              <option value="779" />
             </startOffsets>
             <endOffsets>
-              <option value="902" />
+              <option value="821" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="17" />

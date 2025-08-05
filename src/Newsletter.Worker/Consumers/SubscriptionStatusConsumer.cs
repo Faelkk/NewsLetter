@@ -23,8 +23,6 @@ public class SubscriptionStatusConsumer : BackgroundService
             GroupId = "newsletter-subscription-group",
             AutoOffsetReset = AutoOffsetReset.Earliest
         };
-
-        
         
         _consumer = new ConsumerBuilder<string, string>(config).Build();
         _consumer.Subscribe("subscription-status-updated");
@@ -39,9 +37,13 @@ public class SubscriptionStatusConsumer : BackgroundService
             try
             {
                 var result = _consumer.Consume(stoppingToken);
-                _logger.LogInformation($"Consumed new subscription status: {result.Value}");
+                
+                _logger.LogInformation("Valor recebido no Kafka: {Value}", result.Message.Value);
 
+                _logger.LogInformation($"Consumed new subscription status: {result.Value}");
+        
                  var data = JsonSerializer.Deserialize<SubscriptionStatusUpdatedEvent>(result.Message.Value);
+                 Console.WriteLine(("Caiu no consumer"));
                  await _handler.HandleAsync(data);
                  
             }

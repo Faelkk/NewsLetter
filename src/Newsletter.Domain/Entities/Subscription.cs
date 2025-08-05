@@ -10,7 +10,7 @@ public class Subscription
     public string? ExternalSubscriptionId { get; set; }
     public string Provider { get; set; } = "Stripe";
 
-    public string Plan { get; set; }
+    public string? Plan { get; set; }
 
     public string Status { get; set; } = "pending";
     public DateTime? StartedAt { get; set; }

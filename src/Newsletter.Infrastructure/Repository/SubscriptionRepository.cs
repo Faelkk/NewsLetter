@@ -41,9 +41,9 @@ public class SubscriptionRepository : ISubscriptionRepository
 
         var sql = @"
         INSERT INTO Subscriptions 
-            (id, user_id, external_subscription_id, provider, status, started_at, expires_at, canceled_at, updated_at)
+            (id, user_id, external_subscription_id,plan, provider, status, started_at, expires_at, canceled_at, updated_at)
         VALUES 
-            (@Id, @UserId, @ExternalSubscriptionId, @Provider, @Status, @StartedAt, @ExpiresAt, @CanceledAt, @UpdatedAt)
+            (@Id, @UserId, @ExternalSubscriptionId,@Plan, @Provider, @Status, @StartedAt, @ExpiresAt, @CanceledAt, @UpdatedAt)
         RETURNING *;";
 
         var createdSubscription = await _connection.QuerySingleAsync<Subscription>(sql, subscription);
@@ -58,6 +58,7 @@ public class SubscriptionRepository : ISubscriptionRepository
         var sql = @"
         UPDATE Subscriptions SET
             external_subscription_id = @ExternalSubscriptionId,
+            plan = @Plan,
             provider = @Provider,
             status = @Status,
             started_at = @StartedAt,
@@ -79,4 +80,6 @@ public class SubscriptionRepository : ISubscriptionRepository
         return affectedRows > 0;
     }
 }
+
+
 
