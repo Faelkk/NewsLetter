@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newsletter.Worker", "src\Ne
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsLetter.Test", "src\NewsLetter.Test\NewsLetter.Test.csproj", "{D5DCE255-3F5E-4B1C-9F32-504DA2F655D2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsLetter.Test.Test", "src\NewsLetter.Test.Test\NewsLetter.Test.Test.csproj", "{28E52F07-A9B9-4572-AE82-77349185B8AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,5 +49,9 @@ Global
 		{D5DCE255-3F5E-4B1C-9F32-504DA2F655D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5DCE255-3F5E-4B1C-9F32-504DA2F655D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D5DCE255-3F5E-4B1C-9F32-504DA2F655D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28E52F07-A9B9-4572-AE82-77349185B8AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28E52F07-A9B9-4572-AE82-77349185B8AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28E52F07-A9B9-4572-AE82-77349185B8AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28E52F07-A9B9-4572-AE82-77349185B8AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

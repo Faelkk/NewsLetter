@@ -26,7 +26,6 @@ public class EmailService : IEmailService
 
     public async Task SendMonthlyEmail(string UserEmail,string body)
     {
-        // 🔧 Você pode buscar o e-mail do usuário no banco, se precisar
         string subject = "Sua newsletter mensal";
 
         var smtpHost = _emailSettings.SmtpServer;
