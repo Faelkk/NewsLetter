@@ -10,29 +10,44 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e3e925c3-4186-4082-9bc0-1e01e104e7c2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.NewsLetter/.idea/material_theme_project_new.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.NewsLetter/Docker/compose.generated.override.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NewsLetter.sln.DotSettings.user" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Newsletter.Presentation/appsettings.Development.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Newsletter.Worker/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Newsletter.Worker/KafkaAdmin/CreateTopicProgram.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Newsletter.Worker/Newsletter.Worker.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Newsletter.Worker/Program.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Application/DTOS/Newsletter/SubscriptionWithUserEmail.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Application/Interfaces/IGenerateNewsLetters.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Application/Jobs/CheckExpiredSubscriptionJob.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Application/Jobs/Interfaces/ICheckExpiredSubscriptionJob.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Application/Jobs/Interfaces/ISendMonthlyEmailsJob.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Application/Jobs/Interfaces/IStripeSubscriptionService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Application/Jobs/SendMonthlyEmailsJob.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Domain/Dtos/SubscriptionExpiryDto.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Domain/Dtos/SubscriptionWithUserEmail.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Domain/Interfaces/IEmailService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Config/GeminiOptions.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Jobs/Wrappers/CheckExpiredSubscriptionsJobWrapper.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Jobs/Wrappers/SendMonthlyEmailsJobWrapper.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Services/EmailService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Services/GeminiService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Services/GenerateNewsLetters.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Settings/EmailSettings.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Stripe/StripeSubscription.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Newsletter.Presentation/Hangfire/HangfireAuthorizationFilter.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.NewsLetter/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.NewsLetter/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/compose.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NewsLetter.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/NewsLetter.sln.DotSettings.user" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Newsletter.Application/DTOS/Payments/CreateCheckoutSessionRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Application/DTOS/Payments/CreateCheckoutSessionRequest.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Newsletter.Application/DTOS/Subscriptions/SubscriptionDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Application/DTOS/Subscriptions/SubscriptionDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Application/Events/ConfirmSubscriptionRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Application/Events/ConfirmSubscriptionRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Application/Events/SubscriptionStatusUpdatedEvent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Application/Events/SubscriptionStatusUpdatedEvent.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Newsletter.Application/DTOS/Subscriptions/UpdateSubscriptionRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Application/DTOS/Subscriptions/UpdateSubscriptionRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Newsletter.Application/Newsletter.Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Application/Newsletter.Application.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Newsletter.Application/Services/NewsletterService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Application/Services/NewsletterService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Newsletter.Application/Services/SubscriptionService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Application/Services/SubscriptionService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Newsletter.Application/UseCases/ConfirmSubscription.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Application/UseCases/ConfirmSubscription.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Newsletter.Domain/Entities/NewsletterEntry.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Domain/Entities/NewsletterEntry.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Newsletter.Domain/Entities/Subscription.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Domain/Entities/Subscription.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Kafka/Producers/SubscriptionStatusProducer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Kafka/Producers/SubscriptionStatusProducer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Newsletter.Domain/Interfaces/ISubscriptionRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Domain/Interfaces/ISubscriptionRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Newsletter.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Newsletter.Infrastructure.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Repository/SubscriptionRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Repository/SubscriptionRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Seed/DatabaseSeed.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Seed/DatabaseSeed.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Stripe/StripeCheckoutService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Stripe/StripeCheckoutService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Stripe/StripeWebhookHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Stripe/StripeWebhookHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Worker/Consumers/SubscriptionStatusConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Worker/Consumers/SubscriptionStatusConsumer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Worker/Handlers/SubscriptionStatusUpdateHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Worker/Handlers/SubscriptionStatusUpdateHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Newsletter.Presentation/Newsletter.Presentation.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Presentation/Newsletter.Presentation.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Newsletter.Presentation/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Presentation/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Newsletter.Worker/Newsletter.Worker.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Worker/Newsletter.Worker.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,22 +73,20 @@
     &quot;assignee&quot;: &quot;Faelkk&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Faelkk/NewsLetter.git",
-    "accountId": "180800af-63dd-4ab4-883d-43439598d63e"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Faelkk/NewsLetter.git&quot;,
+    &quot;accountId&quot;: &quot;180800af-63dd-4ab4-883d-43439598d63e&quot;
   }
-}]]></component>
+}</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/35089616d11149d390374bacc63c53616e400/58/5f4e2915/IProducer`2.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/35d6e78970da402f83e2e6d9a1f690921de910/18/50dc9e94/ActionMethodExecutor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b95edcc1c50e44ebbf7efbbca83c493ee8e928/69/8979b5f1/IEnumerable`1.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b95edcc1c50e44ebbf7efbbca83c493ee8e928/a0/046fa94b/Dictionary`2.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b95edcc1c50e44ebbf7efbbca83c493ee8e928/b8/2f5fb1bf/ExceptionDispatchInfo.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/27722f6f2ca9116897d3389b7231e8a18fcfaf0868a5cb9fac5b6b4c1d5263/SessionService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Newsletter.Application/DTOS/Newsletter/SubscriptionWithUserEmail.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
@@ -95,29 +108,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Launch Settings Profile.Newsletter.Presentation: http.executor": "Debug",
-    "Docker.compose.yaml: Compose Deployment.executor": "Run",
-    "Docker.src/Newsletter.Presentation/Dockerfile publish.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.keymap",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Launch Settings Profile.Newsletter.Presentation: http.executor&quot;: &quot;Debug&quot;,
+    &quot;Docker.compose.yaml: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.src/Newsletter.Presentation/Dockerfile publish.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "postgresql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RiderProblemsViewState">
     <option name="showPreview" value="true" />
   </component>
@@ -272,6 +285,8 @@
       <workItem from="1753982398435" duration="9319000" />
       <workItem from="1754303382357" duration="1048000" />
       <workItem from="1754341728146" duration="13248000" />
+      <workItem from="1754433698844" duration="5798000" />
+      <workItem from="1754516802830" duration="13185000" />
     </task>
     <task id="LOCAL-00001" summary="Feat: initial structure">
       <option name="closed" value="true" />
@@ -361,6 +376,17 @@
   </component>
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Feat: initial structure" />

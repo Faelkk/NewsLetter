@@ -30,6 +30,7 @@ namespace Newsletter.Infrastructure.Seed
 {
     
     var dropSubscriptions = "DROP TABLE IF EXISTS Subscriptions;";
+    var dropNewLetters = "DROP TABLE IF EXISTS Newsletters;";
     
     var createUsers = """
         CREATE TABLE IF NOT EXISTS Users (
@@ -55,6 +56,7 @@ namespace Newsletter.Infrastructure.Seed
             plan TEXT,
             provider TEXT NOT NULL,
             status TEXT NOT NULL,
+            next_delivery_date TIMESTAMP,
             started_at TIMESTAMP,
             expires_at TIMESTAMP,
             canceled_at TIMESTAMP,
@@ -72,11 +74,12 @@ namespace Newsletter.Infrastructure.Seed
             id UUID PRIMARY KEY,
             user_id UUID NOT NULL,
             content TEXT NOT NULL,
+            topics TEXT[] NOT NULL,
             sent BOOLEAN NOT NULL,
             created_at TIMESTAMP NOT NULL
         );
     """;
-    
+    connection.Execute(dropNewLetters);
     connection.Execute(dropSubscriptions);
     connection.Execute(createUsers);
     connection.Execute(createEmailIndex);

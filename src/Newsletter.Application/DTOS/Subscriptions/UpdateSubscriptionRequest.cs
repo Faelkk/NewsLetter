@@ -7,6 +7,7 @@ public record UpdateSubscriptionRequest(
     string? Provider,
     string? Status,
     string? Plan,
+    DateTime? NextDeliveryDate,
     DateTime? StartedAt,
     DateTime? ExpiresAt,
     DateTime? CanceledAt

@@ -24,6 +24,8 @@ public class ConfirmSubscriptionStatus : IConfirmSubscriptionStatus
         
         subscription.UpdatedAt = DateTime.UtcNow;
         subscription.StartedAt = DateTime.UtcNow;
+        subscription.NextDeliveryDate = DateTime.UtcNow.Date;
+
         subscription.Plan = request.PlanId;
         subscription.ExternalSubscriptionId = request.ExternalSubscriptionId;
 

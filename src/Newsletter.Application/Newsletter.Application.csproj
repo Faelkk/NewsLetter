@@ -10,4 +10,8 @@
       <ProjectReference Include="..\Newsletter.Domain\Newsletter.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="DTOS\Newsletter\SubscriptionWithUserEmail.cs" />
+    </ItemGroup>
+
 </Project>

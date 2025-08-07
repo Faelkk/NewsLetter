@@ -45,8 +45,7 @@ public class NewsletterService : INewsletterService
 
         var topics = user.Interests;
 
-
-  
+        
         var entity = new NewsletterEntry
         {
             Id = Guid.NewGuid(),

@@ -1,13 +1,13 @@
-namespace Newsletter.Domain.Entities;
+    namespace Newsletter.Domain.Entities;
 
-public class NewsletterEntry
-{
-    public Guid Id { get; set; }
-    public Guid UserId { get; set; }
-    public required string[] Topics { get; set; }
-    public string Content { get; set; } = null!;
-    public bool Sent { get; set; } = false;
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-}
+    public class NewsletterEntry
+    {
+        public Guid Id { get; set; }
+        public Guid UserId { get; set; }
+        public required string[] Topics { get; set; }
+        public string Content { get; set; } = null!;
+        public bool Sent { get; set; } = false;
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    }
 
 

@@ -19,4 +19,4 @@ public record CreateCheckoutSessionRequest(
     
     [Required(ErrorMessage = "Subscription id is required.")]
     Guid SubscriptionId 
-);
+); 

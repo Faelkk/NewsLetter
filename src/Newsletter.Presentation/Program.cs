@@ -1,18 +1,27 @@
     using System.Text;
+    using Hangfire;
+    using Hangfire.PostgreSql;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.IdentityModel.Tokens;
     using Newsletter.Application.Interfaces;
+    using Newsletter.Application.Jobs;
+    using Newsletter.Application.Jobs.Interfaces;
     using Newsletter.Application.Services;
     using Newsletter.Application.UseCases;
     using Newsletter.Domain.Interfaces;
+    using Newsletter.Infrastructure.Config;
     using Newsletter.Infrastructure.Context;
+    using Newsletter.Infrastructure.Email;
+    using Newsletter.Infrastructure.Interfaces;
     using Newsletter.Infrastructure.Kafka.Producers;
     using Newsletter.Infrastructure.Repository;
     using Newsletter.Infrastructure.Seed;
     using Newsletter.Infrastructure.Services;
     using Newsletter.Infrastructure.Settings;
     using Newsletter.Infrastructure.Stripe;
+    using Newsletter.Presentation.Hangfire;
+    using Newsletter.Presentation.Jobs.Wrappers;
     using Newsletter.Presentation.Middlewares;
 
     var builder = WebApplication.CreateBuilder(args);
@@ -33,13 +42,28 @@
     builder.Services.AddScoped<IConfirmSubscriptionStatus, ConfirmSubscriptionStatus>();
     builder.Services.AddScoped<ISubscriptionStatusProducer,SubscriptionStatusProducer>();
     builder.Services.AddScoped<IJwtService, JwtService>();
+    builder.Services.AddScoped<ICheckExpiredSubscriptionJob,CheckExpiredSubscriptionJob>();
+    builder.Services.AddScoped<IStripeSubscriptionService, StripeSubscriptionService>();
+    builder.Services.AddScoped<ISendMonthlyEmailsJob,SendMonthlyEmailsJob>();
+    builder.Services.AddScoped<IEmailService, EmailService>();
+    builder.Services.AddScoped<IGenerateNewsLetters, GenerateNewsLetters>();
+
 
     builder.Services.AddScoped<DatabaseSeed>();
+    
     builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
     builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
+    builder.Services.Configure<GeminiOptions>(builder.Configuration.GetSection("Gemini"));
+    builder.Services.AddHttpClient<GeminiService>();
+    builder.Services.AddHangfire(config =>
+        config.UsePostgreSqlStorage(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-
+    builder.Services.AddHangfireServer();
+    
+    
     var jwtSettings = builder.Configuration.GetSection("Jwt").Get<JwtSettings>();
+    builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+
     builder.Services.AddSingleton(jwtSettings);
 
     builder.Services.AddAuthentication(options =>
@@ -106,6 +130,11 @@
 
     app.UseAuthentication();
     app.UseAuthorization();
+    app.UseHangfireDashboard("/hangfire", new DashboardOptions
+    {
+        Authorization = new[] { new HangfireAuthorizationFilter() }
+    });
+
 
     app.MapControllers();
     app.UseSwagger();
@@ -113,6 +142,18 @@
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "Newsletters API v1");
     });
+
+     RecurringJob.AddOrUpdate<SendMonthlyEmailsJobWrapper>(
+         "daily-emails",
+         job => job.Execute(),
+        Cron.Daily()
+     );
+    
+    RecurringJob.AddOrUpdate<CheckExpiredSubscriptionsJobWrapper>(
+        "check-expired-subscriptions",
+        job => job.Execute(),
+        Cron.Daily()
+    );
 
 
     if (app.Environment.IsDevelopment())

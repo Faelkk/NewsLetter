@@ -2,6 +2,7 @@ using Newsletter.Application.DTOS.Subscriptions;
 using Newsletter.Application.Interfaces;
 using Newsletter.Domain.Entities;
 using Newsletter.Domain.Interfaces;
+using Newsletter.Infrastructure.Interfaces;
 using Newsletter.Presentation.DTOS;
 
 namespace Newsletter.Application.Services;
@@ -10,6 +11,7 @@ public class SubscriptionService : ISubscriptionService
 {
     private readonly ISubscriptionRepository _subscriptionRepository;
     private readonly IUserRepository _userRepository;
+    private readonly IStripeSubscriptionService _stripeSubscriptionService;
 
     public SubscriptionService(ISubscriptionRepository subscriptionRepository,IUserRepository userRepository)
     {
@@ -50,6 +52,7 @@ public class SubscriptionService : ISubscriptionService
             ExternalSubscriptionId = null,
             Plan = null,
             Provider = request.Provider ?? "Stripe",
+            NextDeliveryDate = null,
             Status = "pending",
             StartedAt = DateTime.UtcNow,
             ExpiresAt = DateTime.UtcNow.AddMonths(1),
@@ -73,6 +76,7 @@ public class SubscriptionService : ISubscriptionService
         existing.Plan = request.Plan ?? existing.Plan; 
         existing.Provider = request.Provider ?? existing.Provider;
         existing.Status = request.Status ?? existing.Status;
+        existing.NextDeliveryDate = request.NextDeliveryDate ?? existing.NextDeliveryDate;
         existing.StartedAt = request.StartedAt ?? existing.StartedAt;
         existing.ExpiresAt = request.ExpiresAt ?? existing.ExpiresAt;
         existing.CanceledAt = request.CanceledAt ?? existing.CanceledAt;
@@ -87,6 +91,23 @@ public class SubscriptionService : ISubscriptionService
 
     public async Task<bool> DeleteByUserAsync(Guid userId)
     {
+        var subscription = await _subscriptionRepository.GetByUserIdAsync(userId);
+        if (subscription == null)
+            return false;
+
+        if (!string.IsNullOrWhiteSpace(subscription.ExternalSubscriptionId) &&
+            subscription.Provider == "Stripe")
+        {
+            try
+            {
+                await _stripeSubscriptionService.CancelSubscriptionAsync(subscription.ExternalSubscriptionId!);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao cancelar assinatura no Stripe: {ex.Message}");
+            }
+        }
+
         return await _subscriptionRepository.DeleteAsync(userId);
     }
 
@@ -99,6 +120,7 @@ public class SubscriptionService : ISubscriptionService
             Plan: sub.Plan,
             Provider: sub.Provider,
             Status: sub.Status,
+            NextDeliveryDate: sub.NextDeliveryDate,
             StartedAt: sub.StartedAt,
             ExpiresAt: sub.ExpiresAt,
             CanceledAt: sub.CanceledAt,
