@@ -12,7 +12,6 @@ public class NewsLetterUnitsDomainNewLettersTest
         var user = new NewsletterEntry()
         {
             Id = Guid.NewGuid(),
-            Sent = true,
             Topics = ["Tecnologia"],
             UserId = Guid.NewGuid(),
             Content = "Testando conteudo",
@@ -21,7 +20,6 @@ public class NewsLetterUnitsDomainNewLettersTest
 
         Assert.NotNull(user);
         Assert.Equal(now, user.CreatedAt); 
-        Assert.True(user.Sent);
         Assert.Contains("Tecnologia", user.Topics);
         Assert.Contains("Testando conteudo", user.Content);
     }
