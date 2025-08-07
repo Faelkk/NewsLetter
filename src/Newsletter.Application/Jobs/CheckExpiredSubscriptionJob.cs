@@ -13,6 +13,7 @@ public class CheckExpiredSubscriptionJob : ICheckExpiredSubscriptionJob
     public async Task Execute()
     {
         var today = DateTime.UtcNow.Date;
+        Console.WriteLine("entrou aq");
         await _subscriptionRepository.SetPendingStatusForExpiredSubscriptionsAsync(today);
     }
 }

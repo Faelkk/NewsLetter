@@ -19,16 +19,30 @@ public class ConfirmSubscriptionStatus : IConfirmSubscriptionStatus
         if (subscription == null) return false;
 
         subscription.Status = request.Status;
-        
+    
         subscription.UpdatedAt = DateTime.UtcNow;
         subscription.StartedAt = DateTime.UtcNow;
         subscription.NextDeliveryDate = DateTime.UtcNow.Date;
 
         subscription.Plan = request.PlanId;
         subscription.ExternalSubscriptionId = request.ExternalSubscriptionId;
+        
+        subscription.ExpiresAt = CalculateExpiry(subscription.StartedAt ?? DateTime.UtcNow, request.PlanId).Date;
+        
 
         await _subscriptionRepository.UpdateAsync(subscription);
         return true;
+    }
+
+    private DateTime CalculateExpiry(DateTime startDate, string planId)
+    {
+        return planId switch
+        {
+            "price_1RqpK7DA64uC2BNAwFZ0nWAt" => startDate.AddMonths(1),     
+            "price_1RqpK7DA64uC2BNAPTIONdHu" => startDate.AddMonths(3),    
+            "price_1RqpK7DA64uC2BNAOTP3Bt2d" => startDate.AddYears(1),    
+            _ => startDate.AddMonths(1) 
+        };
     }
 
 }

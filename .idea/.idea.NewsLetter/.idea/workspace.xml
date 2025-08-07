@@ -11,15 +11,10 @@
   <component name="ChangeListManager">
     <list default="true" id="e3e925c3-4186-4082-9bc0-1e01e104e7c2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.NewsLetter/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.NewsLetter/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Application/Jobs/SendMonthlyEmailsJob.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Application/Jobs/SendMonthlyEmailsJob.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Application/Services/SubscriptionService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Application/Services/SubscriptionService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Newsletter.Application/Jobs/CheckExpiredSubscriptionJob.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Application/Jobs/CheckExpiredSubscriptionJob.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Newsletter.Application/UseCases/ConfirmSubscription.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Application/UseCases/ConfirmSubscription.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Kafka/Producers/SubscriptionStatusProducer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Kafka/Producers/SubscriptionStatusProducer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Seed/DatabaseSeed.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Seed/DatabaseSeed.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Services/GeminiService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Services/GeminiService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Stripe/StripeWebhookHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Stripe/StripeWebhookHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Worker/Consumers/SubscriptionStatusConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Worker/Consumers/SubscriptionStatusConsumer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Worker/Handlers/SubscriptionStatusUpdateHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Worker/Handlers/SubscriptionStatusUpdateHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Repository/SubscriptionRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Repository/SubscriptionRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Newsletter.Presentation/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Presentation/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -258,7 +253,7 @@
       <workItem from="1754303382357" duration="1048000" />
       <workItem from="1754341728146" duration="13248000" />
       <workItem from="1754433698844" duration="5798000" />
-      <workItem from="1754516802830" duration="14468000" />
+      <workItem from="1754516802830" duration="15769000" />
     </task>
     <task id="LOCAL-00001" summary="Feat: initial structure">
       <option name="closed" value="true" />
@@ -348,7 +343,15 @@
       <option name="project" value="LOCAL" />
       <updated>1754531029559</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Fix: delete subscription in db and subs in stripe">
+      <option name="closed" value="true" />
+      <created>1754532134203</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1754532134203</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -380,7 +383,8 @@
     <MESSAGE value="refactor: update entities, DTOs, queries, and add SubscriptionPlan enum" />
     <MESSAGE value="refactor: cleanup enums, add interfaces, update checkout/subscription DTOs and webhook logic, and config in docker compose" />
     <MESSAGE value="feat: add newsletter generation, subscription jobs, and Hangfire integration" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: add newsletter generation, subscription jobs, and Hangfire integration" />
+    <MESSAGE value="Fix: delete subscription in db and subs in stripe" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix: delete subscription in db and subs in stripe" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

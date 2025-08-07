@@ -152,7 +152,7 @@
     RecurringJob.AddOrUpdate<CheckExpiredSubscriptionsJobWrapper>(
         "check-expired-subscriptions",
         job => job.Execute(),
-        Cron.Daily()
+        Cron.Minutely
     );
 
 

@@ -109,7 +109,7 @@ public class SubscriptionRepository : ISubscriptionRepository
         plan = @Plan,
         provider = @Provider,
         status = @Status,
-        next_delivery_date = @NextDeliveryDate, -- ✅ Corrigido aqui
+        next_delivery_date = @NextDeliveryDate, 
         started_at = @StartedAt,
         expires_at = @ExpiresAt,
         canceled_at = @CanceledAt,
@@ -141,12 +141,16 @@ public class SubscriptionRepository : ISubscriptionRepository
     {
         var sql = @"
         UPDATE subscriptions
-        SET status = 'pending'
-        WHERE status = 'active' AND expires_at <= @today
-    ";
+        SET status = 'pending',
+            updated_at = @now
+        WHERE status = 'active' AND expires_at <= @today";
 
-        await _connection.ExecuteAsync(sql, new { today });
+        await _connection.ExecuteAsync(sql, new {
+            today,
+            now = DateTime.UtcNow
+        });
     }
+
 
 
     public async Task<bool> DeleteAsync(Guid userId)
