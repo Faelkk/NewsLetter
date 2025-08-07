@@ -60,8 +60,6 @@ namespace Newsletter.Infrastructure.Stripe
                             ExternalSubscriptionId = subscriptionId,
                             PlanId = priceId
                         };
-                        
-                        Console.WriteLine("entrou aq e deu publish");
 
                         await _producer.PublishAsync(payload);
                     }

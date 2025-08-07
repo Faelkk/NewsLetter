@@ -15,8 +15,6 @@ public class ConfirmSubscriptionStatus : IConfirmSubscriptionStatus
 
     public async Task<bool> ExecuteAsync(ConfirmSubscriptionRequest request)
     {
-        Console.WriteLine("entrou no confirm subscription");
-        Console.WriteLine($"{request} request");
         var subscription = await _subscriptionRepository.GetBySubscriptionIdAsync(request.SubscriptionId);
         if (subscription == null) return false;
 

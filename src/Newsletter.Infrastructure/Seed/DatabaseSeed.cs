@@ -29,8 +29,6 @@ namespace Newsletter.Infrastructure.Seed
         private void CreateTables(IDbConnection connection)
 {
     
-    var dropSubscriptions = "DROP TABLE IF EXISTS Subscriptions;";
-    var dropNewLetters = "DROP TABLE IF EXISTS Newsletters;";
     
     var createUsers = """
         CREATE TABLE IF NOT EXISTS Users (
@@ -79,8 +77,6 @@ namespace Newsletter.Infrastructure.Seed
             created_at TIMESTAMP NOT NULL
         );
     """;
-    connection.Execute(dropNewLetters);
-    connection.Execute(dropSubscriptions);
     connection.Execute(createUsers);
     connection.Execute(createEmailIndex);
     connection.Execute(createSubscriptions);

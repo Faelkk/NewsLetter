@@ -18,8 +18,6 @@ public class GeminiService
 
     public async Task<string> GenerateNewsletterContent(string topics)
     {
-        Console.WriteLine($"{topics} entrou generate");
-        
 
         var prompt = $"Crie uma newsletter com base no seguintes tópico: {topics}";
 
@@ -66,8 +64,6 @@ public class GeminiService
         {
             throw new Exception("Erro ao gerar texto para news letters");
         }
-        
-        Console.WriteLine(generatedText);
 
         return generatedText;
     }

@@ -13,11 +13,16 @@ public class SubscriptionService : ISubscriptionService
     private readonly IUserRepository _userRepository;
     private readonly IStripeSubscriptionService _stripeSubscriptionService;
 
-    public SubscriptionService(ISubscriptionRepository subscriptionRepository,IUserRepository userRepository)
+    public SubscriptionService(
+        ISubscriptionRepository subscriptionRepository,
+        IUserRepository userRepository,
+        IStripeSubscriptionService stripeSubscriptionService)
     {
         _subscriptionRepository = subscriptionRepository;
         _userRepository = userRepository;
+        _stripeSubscriptionService = stripeSubscriptionService;
     }
+
 
     public async Task<IEnumerable<SubscriptionDto>> GetAllAsync()
     {
@@ -103,7 +108,7 @@ public class SubscriptionService : ISubscriptionService
                 await _stripeSubscriptionService.CancelSubscriptionAsync(subscription.ExternalSubscriptionId!);
             }
             catch (Exception ex)
-            {
+            {   
                 throw new Exception($"Erro ao cancelar assinatura no Stripe: {ex.Message}");
             }
         }
@@ -119,7 +124,7 @@ public class SubscriptionService : ISubscriptionService
             ExternalSubscriptionId: sub.ExternalSubscriptionId,
             Plan: sub.Plan,
             Provider: sub.Provider,
-            Status: sub.Status,
+            Status: sub.Status, 
             NextDeliveryDate: sub.NextDeliveryDate,
             StartedAt: sub.StartedAt,
             ExpiresAt: sub.ExpiresAt,

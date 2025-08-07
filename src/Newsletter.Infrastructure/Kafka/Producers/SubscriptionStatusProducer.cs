@@ -36,7 +36,6 @@ public class SubscriptionStatusProducer : ISubscriptionStatusProducer
 
         try
         {
-            Console.WriteLine("Entrou aq no kafka e publicou");
             var result = await _producer.ProduceAsync(Topic, message);
             _logger.LogInformation("Mensagem publicada no Kafka: {Offset}", result.Offset);
         }

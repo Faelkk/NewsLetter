@@ -10,44 +10,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e3e925c3-4186-4082-9bc0-1e01e104e7c2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Newsletter.Application/DTOS/Newsletter/SubscriptionWithUserEmail.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Newsletter.Application/Interfaces/IGenerateNewsLetters.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Newsletter.Application/Jobs/CheckExpiredSubscriptionJob.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Newsletter.Application/Jobs/Interfaces/ICheckExpiredSubscriptionJob.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Newsletter.Application/Jobs/Interfaces/ISendMonthlyEmailsJob.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Newsletter.Application/Jobs/Interfaces/IStripeSubscriptionService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Newsletter.Application/Jobs/SendMonthlyEmailsJob.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Newsletter.Domain/Dtos/SubscriptionExpiryDto.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Newsletter.Domain/Dtos/SubscriptionWithUserEmail.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Newsletter.Domain/Interfaces/IEmailService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Config/GeminiOptions.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Jobs/Wrappers/CheckExpiredSubscriptionsJobWrapper.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Jobs/Wrappers/SendMonthlyEmailsJobWrapper.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Services/EmailService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Services/GeminiService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Services/GenerateNewsLetters.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Settings/EmailSettings.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Stripe/StripeSubscription.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Newsletter.Presentation/Hangfire/HangfireAuthorizationFilter.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.NewsLetter/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.NewsLetter/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NewsLetter.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/NewsLetter.sln.DotSettings.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Application/DTOS/Payments/CreateCheckoutSessionRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Application/DTOS/Payments/CreateCheckoutSessionRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Application/DTOS/Subscriptions/SubscriptionDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Application/DTOS/Subscriptions/SubscriptionDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Application/DTOS/Subscriptions/UpdateSubscriptionRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Application/DTOS/Subscriptions/UpdateSubscriptionRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Application/Newsletter.Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Application/Newsletter.Application.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Application/Services/NewsletterService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Application/Services/NewsletterService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Newsletter.Application/Jobs/SendMonthlyEmailsJob.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Application/Jobs/SendMonthlyEmailsJob.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Newsletter.Application/Services/SubscriptionService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Application/Services/SubscriptionService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Newsletter.Application/UseCases/ConfirmSubscription.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Application/UseCases/ConfirmSubscription.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Domain/Entities/NewsletterEntry.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Domain/Entities/NewsletterEntry.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Domain/Entities/Subscription.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Domain/Entities/Subscription.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Domain/Interfaces/ISubscriptionRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Domain/Interfaces/ISubscriptionRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Newsletter.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Newsletter.Infrastructure.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Repository/SubscriptionRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Repository/SubscriptionRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Kafka/Producers/SubscriptionStatusProducer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Kafka/Producers/SubscriptionStatusProducer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Seed/DatabaseSeed.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Seed/DatabaseSeed.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Stripe/StripeCheckoutService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Stripe/StripeCheckoutService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Presentation/Newsletter.Presentation.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Presentation/Newsletter.Presentation.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Presentation/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Presentation/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Worker/Newsletter.Worker.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Worker/Newsletter.Worker.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Services/GeminiService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Services/GeminiService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Stripe/StripeWebhookHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Stripe/StripeWebhookHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Newsletter.Worker/Consumers/SubscriptionStatusConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Worker/Consumers/SubscriptionStatusConsumer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Newsletter.Worker/Handlers/SubscriptionStatusUpdateHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Worker/Handlers/SubscriptionStatusUpdateHandler.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -286,7 +258,7 @@
       <workItem from="1754303382357" duration="1048000" />
       <workItem from="1754341728146" duration="13248000" />
       <workItem from="1754433698844" duration="5798000" />
-      <workItem from="1754516802830" duration="13185000" />
+      <workItem from="1754516802830" duration="14468000" />
     </task>
     <task id="LOCAL-00001" summary="Feat: initial structure">
       <option name="closed" value="true" />
@@ -368,7 +340,15 @@
       <option name="project" value="LOCAL" />
       <updated>1754359043387</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="feat: add newsletter generation, subscription jobs, and Hangfire integration">
+      <option name="closed" value="true" />
+      <created>1754531029559</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1754531029559</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -399,7 +379,8 @@
     <MESSAGE value="fix: integrate newsletter repository and add DELETE route for newsletter by ID" />
     <MESSAGE value="refactor: update entities, DTOs, queries, and add SubscriptionPlan enum" />
     <MESSAGE value="refactor: cleanup enums, add interfaces, update checkout/subscription DTOs and webhook logic, and config in docker compose" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: cleanup enums, add interfaces, update checkout/subscription DTOs and webhook logic, and config in docker compose" />
+    <MESSAGE value="feat: add newsletter generation, subscription jobs, and Hangfire integration" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add newsletter generation, subscription jobs, and Hangfire integration" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
