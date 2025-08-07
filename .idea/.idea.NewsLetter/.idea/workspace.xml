@@ -11,10 +11,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e3e925c3-4186-4082-9bc0-1e01e104e7c2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.NewsLetter/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.NewsLetter/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Application/Jobs/CheckExpiredSubscriptionJob.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Application/Jobs/CheckExpiredSubscriptionJob.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Application/UseCases/ConfirmSubscription.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Application/UseCases/ConfirmSubscription.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Repository/SubscriptionRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Infrastructure/Repository/SubscriptionRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Newsletter.Presentation/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Newsletter.Presentation/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -253,7 +249,7 @@
       <workItem from="1754303382357" duration="1048000" />
       <workItem from="1754341728146" duration="13248000" />
       <workItem from="1754433698844" duration="5798000" />
-      <workItem from="1754516802830" duration="15769000" />
+      <workItem from="1754516802830" duration="16548000" />
     </task>
     <task id="LOCAL-00001" summary="Feat: initial structure">
       <option name="closed" value="true" />
@@ -351,7 +347,15 @@
       <option name="project" value="LOCAL" />
       <updated>1754532134203</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="fix: job for expiry date">
+      <option name="closed" value="true" />
+      <created>1754533512268</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1754533512268</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -384,7 +388,8 @@
     <MESSAGE value="refactor: cleanup enums, add interfaces, update checkout/subscription DTOs and webhook logic, and config in docker compose" />
     <MESSAGE value="feat: add newsletter generation, subscription jobs, and Hangfire integration" />
     <MESSAGE value="Fix: delete subscription in db and subs in stripe" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix: delete subscription in db and subs in stripe" />
+    <MESSAGE value="fix: job for expiry date" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: job for expiry date" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
