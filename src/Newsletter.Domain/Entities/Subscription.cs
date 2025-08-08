@@ -21,3 +21,4 @@ public class Subscription
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 }
 
+ 

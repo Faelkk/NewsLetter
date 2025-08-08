@@ -1,16 +1,25 @@
-using Testcontainers.PostgreSql;
-
-namespace NewsLetter.Test.Test.Fixtures;
-
-
+using Microsoft.Extensions.Configuration;
 using Npgsql;
 using Dapper;
-using Xunit;
+using Testcontainers.PostgreSql;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace NewsLetter.Test.Test.Fixtures;
 
 public class PostgresTestContainerFixture : IAsyncLifetime
 {
     public PostgreSqlContainer Container { get; private set; } = null!;
     public string ConnectionString => Container.GetConnectionString();
+
+    private IConfiguration? _configuration;
+
+    public IConfiguration Configuration => _configuration ??= new ConfigurationBuilder()
+        .AddInMemoryCollection(new Dictionary<string, string?>
+        {
+            { "ConnectionStrings:DefaultConnection", ConnectionString }
+        })
+        .Build();
 
     public async Task InitializeAsync()
     {
@@ -30,7 +39,7 @@ public class PostgresTestContainerFixture : IAsyncLifetime
         await conn.OpenAsync();
 
         var sql = @"
-            CREATE TABLE Users (
+            CREATE TABLE IF NOT EXISTS Users (
                 id UUID PRIMARY KEY,
                 name TEXT NOT NULL,
                 email TEXT NOT NULL,
@@ -39,7 +48,7 @@ public class PostgresTestContainerFixture : IAsyncLifetime
                 interests TEXT[] NOT NULL
             );
 
-            CREATE TABLE Subscriptions (
+            CREATE TABLE IF NOT EXISTS Subscriptions (
                 id UUID PRIMARY KEY,
                 user_id UUID NOT NULL REFERENCES Users(id) ON DELETE CASCADE,
                 external_subscription_id TEXT,
@@ -53,7 +62,7 @@ public class PostgresTestContainerFixture : IAsyncLifetime
                 updated_at TIMESTAMP NOT NULL
             );
 
-            CREATE TABLE Newsletters (
+            CREATE TABLE IF NOT EXISTS Newsletters (
                 id UUID PRIMARY KEY,
                 user_id UUID NOT NULL REFERENCES Users(id) ON DELETE CASCADE,
                 topics TEXT[] NOT NULL,
@@ -82,5 +91,4 @@ public class PostgresTestContainerFixture : IAsyncLifetime
     ";
         await conn.ExecuteAsync(sql);
     }
-
 }

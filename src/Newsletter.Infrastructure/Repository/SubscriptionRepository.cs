@@ -137,6 +137,7 @@ public class SubscriptionRepository : ISubscriptionRepository
         });
     }
 
+
     public async Task SetPendingStatusForExpiredSubscriptionsAsync(DateTime today)
     {
         var sql = @"

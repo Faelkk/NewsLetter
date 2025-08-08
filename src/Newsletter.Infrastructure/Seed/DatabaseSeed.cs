@@ -32,13 +32,13 @@ namespace Newsletter.Infrastructure.Seed
     
     var createUsers = """
         CREATE TABLE IF NOT EXISTS Users (
-            id UUID PRIMARY KEY,
-            name TEXT NOT NULL,
-            email TEXT NOT NULL UNIQUE,
-            password TEXT NOT NULL,
-            interests TEXT[] NOT NULL,
-            role TEXT NOT NULL
-        );
+                   id UUID PRIMARY KEY,
+                   name TEXT NOT NULL,
+                   email TEXT NOT NULL,
+                   password TEXT NOT NULL,
+                   role TEXT NOT NULL,
+                   interests TEXT[] NOT NULL
+               );
     """;
 
     var createEmailIndex = """
@@ -47,20 +47,19 @@ namespace Newsletter.Infrastructure.Seed
     
     
     var createSubscriptions = """
-        CREATE TABLE IF NOT EXISTS Subscriptions (
-            id UUID PRIMARY KEY,
-            user_id UUID NOT NULL,
-            external_subscription_id TEXT,
-            plan TEXT,
-            provider TEXT NOT NULL,
-            status TEXT NOT NULL,
-            next_delivery_date TIMESTAMP,
-            started_at TIMESTAMP,
-            expires_at TIMESTAMP,
-            canceled_at TIMESTAMP,
-            updated_at TIMESTAMP NOT NULL
-          
-        );
+         CREATE TABLE IF NOT EXISTS Subscriptions (
+                id UUID PRIMARY KEY,
+                user_id UUID NOT NULL REFERENCES Users(id) ON DELETE CASCADE,
+                external_subscription_id TEXT,
+                provider TEXT NOT NULL,
+                plan TEXT,
+                status TEXT NOT NULL,
+                next_delivery_date TIMESTAMP,
+                started_at TIMESTAMP,
+                expires_at TIMESTAMP,
+                canceled_at TIMESTAMP,
+                updated_at TIMESTAMP NOT NULL
+            );
     """;
 
     var createSubscriptionUserIdUniqueIndex = """
@@ -69,13 +68,13 @@ namespace Newsletter.Infrastructure.Seed
 
     var createNewsletters = """
         CREATE TABLE IF NOT EXISTS Newsletters (
-            id UUID PRIMARY KEY,
-            user_id UUID NOT NULL,
-            content TEXT NOT NULL,
-            topics TEXT[] NOT NULL,
-            sent BOOLEAN NOT NULL,
-            created_at TIMESTAMP NOT NULL
-        );
+        id UUID PRIMARY KEY,
+        user_id UUID NOT NULL REFERENCES Users(id) ON DELETE CASCADE,
+        topics TEXT[] NOT NULL,
+        content TEXT NOT NULL,
+        sent BOOLEAN NOT NULL,
+        created_at TIMESTAMP NOT NULL
+    );
     """;
     connection.Execute(createUsers);
     connection.Execute(createEmailIndex);

@@ -21,9 +21,7 @@ public class SendMonthlyEmailsJob : ISendMonthlyEmailsJob
     public async Task Execute()
     {
         var today = DateTime.UtcNow.Date;
-        
-        
-
+            
         var subscriptions = await _subscriptionRepository.GetActiveSubscriptionsWithUserEmail(today);
         
         var random = new Random();
@@ -40,8 +38,9 @@ public class SendMonthlyEmailsJob : ISendMonthlyEmailsJob
              
              await _emailService.SendMonthlyEmail(sub.UserEmail, newLetter);
             
-             sub.NextDeliveryDate = (sub.NextDeliveryDate ?? DateTime.UtcNow).AddMonths(1);
+             sub.NextDeliveryDate = DateTime.UtcNow.Date.AddMonths(1);
              await _subscriptionRepository.UpdateNextDeliveryDateAsync(sub.SubscriptionId, sub.NextDeliveryDate);
         }
     }
 } 
+ 

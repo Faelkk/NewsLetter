@@ -2,7 +2,6 @@ namespace NewsLetter.Test.Test.Fixtures;
 
 using Xunit;
 
-
 public abstract class DatabaseTestBase : IAsyncLifetime
 {
     private readonly PostgresTestContainerFixture _fixture;
