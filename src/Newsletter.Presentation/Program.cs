@@ -146,7 +146,7 @@
      RecurringJob.AddOrUpdate<SendMonthlyEmailsJobWrapper>(
          "daily-emails",
          job => job.Execute(),
-        Cron.Minutely
+        Cron.Hourly
      );
     
     RecurringJob.AddOrUpdate<CheckExpiredSubscriptionsJobWrapper>(
