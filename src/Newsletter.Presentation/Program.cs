@@ -4,6 +4,7 @@
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.IdentityModel.Tokens;
+    using Microsoft.OpenApi.Models;
     using Newsletter.Application.Interfaces;
     using Newsletter.Application.Jobs;
     using Newsletter.Application.Jobs.Interfaces;
@@ -23,6 +24,7 @@
     using Newsletter.Presentation.Hangfire;
     using Newsletter.Presentation.Jobs.Wrappers;
     using Newsletter.Presentation.Middlewares;
+    using Scalar.AspNetCore;
 
     var builder = WebApplication.CreateBuilder(args);
     Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
@@ -90,29 +92,39 @@
         options.AddPolicy("RequireAdminRole", policy =>
         policy.RequireRole("Admin"));
     });
+    
 
-    builder.Services.AddOpenApi();
+    builder.Services.AddOpenApi(options =>
+    {
+        options.AddDocumentTransformer((document, context, cancellationToken) =>
+        {
+            document.Info = new OpenApiInfo
+            {
+                Title = "Newsletter API",
+                Version = "v1",
+                Description = "API de newsletters, assinaturas e envio de e-mails automáticos.",
+                Contact = new OpenApiContact
+                {
+                    Name = "Rafael Achtenberg",
+                    Email = "rafael@example.com",
+                    Url = new Uri("https://github.com/Faelkk/NewsLetter")
+                },
+                License = new OpenApiLicense
+                {
+                    Name = "MIT",
+                    Url = new Uri("https://opensource.org/licenses/MIT")
+                }
+            };
+
+            return Task.CompletedTask;
+        });
+    });
+
+
 
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
-    builder.Services.AddSwaggerGen(options =>
-    {
-        options.SwaggerDoc(
-            "v1",
-            new Microsoft.OpenApi.Models.OpenApiInfo
-            {
-                Title = "Newsletters API",
-                Version = "v1",
-                Description = "Teste",
-                Contact = new Microsoft.OpenApi.Models.OpenApiContact
-                {
-                    Name = "Rafael Achtenberg",
-                    Email = "achtenberg.rafa@gmail.com",
-                    Url = new Uri("https://github.com/Faelkk"),
-                },
-            }
-        );
-    });
+
 
     var port = builder.Configuration["APIPORT"] ?? "5010";
     builder.WebHost.UseUrls($"http://*:{port}");
@@ -137,11 +149,6 @@
 
 
     app.MapControllers();
-    app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Newsletters API v1");
-    });
 
      RecurringJob.AddOrUpdate<SendMonthlyEmailsJobWrapper>(
          "daily-emails",
@@ -156,10 +163,16 @@
     );
 
 
-    if (app.Environment.IsDevelopment())
+
+
+    app.MapOpenApi();
+    app.MapScalarApiReference(options =>
     {
-        app.MapOpenApi();
-    }
+        options.WithTitle("Newsletter API")
+            .WithTheme(ScalarTheme.Mars);
+    });
+
+        
     app.UseHttpsRedirection();
 
     app.Run();
